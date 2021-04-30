@@ -215,9 +215,15 @@ function App() {
           <div className="intro-paragraph"> To query your schema, use a Dev Graph in Apollo Studio (recommended)
             or <a id="use-playground" href="#"> GraphQL Playground</a>. Both tools will point to your localhost:4000 and let you query your schema as you make changes.
           </div>
-          <button id="use-dev-graph" className="studio-button">
+          <a
+            href={`https://studio.apollographql.com/dev?endpoint=${encodeURIComponent(window.location.href)}`}
+            className="studio-button" style={{
+              display: 'inline-block',
+              textDecoration: 'none'
+            }}
+          >
             Continue to Apollo Studio
-          </button>
+          </a>
           <div className="save-preference-line">
             <input type="checkbox" id="preference" className="preference-input" />
             <label htmlFor="preference" className="preference-label">
