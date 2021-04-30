@@ -17,6 +17,7 @@ function App() {
         .page-content {
           display: flex;
           flex-direction: column;
+          justify-content: center;
           padding: 80px 40px;
           color: white;
           text-align: center;
@@ -85,7 +86,6 @@ function App() {
           }
         }
         .main-content {
-          flex: 1;
           margin: 40px auto 90px;
           max-width: 472px;
         }
