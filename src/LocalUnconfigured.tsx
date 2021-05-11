@@ -214,6 +214,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           borderRadius: '8px',
           padding: 10,
           marginBottom: 40,
+          margin: 'auto',
           flex: 'none',
           fontSize: 13,
           zIndex: 2,

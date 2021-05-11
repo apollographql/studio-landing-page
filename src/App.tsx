@@ -12,5 +12,9 @@ export default () => {
       )}`,
     );
   }
-  return <LocalUnconfigured endpoint={window.location.href} />;
+  return (
+    <div style={{ height: '100%', width: '100%' }}>
+      <LocalUnconfigured endpoint={window.location.href} />
+    </div>
+  );
 };
