@@ -6,4 +6,6 @@ export default {
   title: 'Studio Landing Page/Landing Pages',
 } as Meta;
 
-export const LocalUnconfigured = () => <LocalUnconfiguredComponent />;
+export const LocalUnconfigured = () => (
+  <LocalUnconfiguredComponent endpoint="localhost:4000" />
+);
