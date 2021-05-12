@@ -161,6 +161,13 @@ export default ({ endpoint }: { endpoint: string }) => (
           <input
             type="checkbox"
             id="preference"
+            onChange={(event) => {
+              if (event.target.checked) {
+                document.cookie = 'redirect=true';
+              } else {
+                document.cookie = 'redirect=false';
+              }
+            }}
             css={{
               opacity: 0,
               '&:checked + .preference-label:before': {
