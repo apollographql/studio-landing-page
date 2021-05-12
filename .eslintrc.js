@@ -12,7 +12,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "prettier", "@typescript-eslint"],
+  plugins: ["@emotion", "react", "prettier", "@typescript-eslint"],
   rules: {
     "prettier/prettier": ["error"],
     "import/extensions": "off",
