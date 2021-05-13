@@ -17,19 +17,22 @@ export default () => {
     );
   }
 
-  const isConfigured = false; // TODO check with glasser what constitutes a configured graph.
+  const { graphRef, isConfigured = false } = JSON.parse(window.landingPage);
+  const endpoint = window.location.href;
+  // TODO check with glasser what constitutes a configured graph.
+
   return (
     <LandingPageBackgroundWrapper>
-      {!!window.graphRef && isConfigured ? (
+      {!!graphRef && isConfigured ? (
         <ProdConfigured
-          endpoint={window.location.href}
-          graphName={window.graphRef.substring(0, window.graphRef.indexOf('@'))}
-          variant={window.graphRef.substring(window.graphRef.indexOf('@') + 1)}
+          endpoint={endpoint}
+          graphName={graphRef.substring(0, graphRef.indexOf('@'))}
+          variant={graphRef.substring(graphRef.indexOf('@') + 1)}
         />
-      ) : window.graphRef ? (
-        <ProdUnconfigured endpoint={window.location.href} />
+      ) : graphRef ? (
+        <ProdUnconfigured endpoint={endpoint} />
       ) : (
-        <LocalUnconfigured endpoint={window.location.href} />
+        <LocalUnconfigured endpoint={endpoint} />
       )}
     </LandingPageBackgroundWrapper>
   );
