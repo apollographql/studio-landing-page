@@ -28,20 +28,20 @@ const LandingPageStoryWrapper = ({
 
 export const LocalUnconfigured = () => (
   <LandingPageStoryWrapper>
-    <LocalUnconfiguredComponent endpoint="localhost:4000" />
+    <LocalUnconfiguredComponent endpoint="https://localhost:4000" />
   </LandingPageStoryWrapper>
 );
 
 export const ProdUnconfigured = () => (
   <LandingPageStoryWrapper>
-    <ProdUnconfiguredComponent endpoint="localhost:4000" />
+    <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
   </LandingPageStoryWrapper>
 );
 
 export const ProdConfigured = () => (
   <LandingPageStoryWrapper>
     <ProdConfiguredComponent
-      endpoint="localhost:4000"
+      endpoint="https://localhost:4000"
       graphName="testGraph"
       variant="current"
     />
