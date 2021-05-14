@@ -17,8 +17,7 @@ executors:
     working_directory: ~/studio-landing-page
 
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:
+  build-app:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
@@ -36,8 +35,16 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn
       - run:
-          name: Run tests
-          command: npm test
+          name: Build
+          command: '[ -d build ] || npm run build -- --no-progress'
+          environment:
+            BUILD_TO_CDN: 'true'
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - build
+            - cdn-lookup-key
+
   cdn-upload:
     executor: gcp-cli/google
     steps:
@@ -59,9 +66,9 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   build-test-deploy:
     jobs:
-      - build-and-test
+      - build-app
       - cdn-upload:
           requires:
-            - build-webpack
+            - build-app
       # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
       # - node/test
