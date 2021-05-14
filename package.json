@@ -85,7 +85,8 @@
     "build-storybook": "build-storybook -s public",
     "chromatic": "npx chromatic --project-token b85a2f6d9260",
     "lint": "eslint --format 'node_modules/eslint-formatter-friendly' --ext .jsx,.ts,.tsx .",
-    "lint-fix": "npm run lint -- --fix"
+    "lint-fix": "npm run lint -- --fix",
+    "typescript:check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
