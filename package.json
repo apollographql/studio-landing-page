@@ -1,4 +1,8 @@
 {
+  "engines": {
+    "node": ">=12.16.1 <15.0",
+    "npm": ">=6.9"
+  },
   "name": "studio-landing-page",
   "version": "0.1.0",
   "private": true,
