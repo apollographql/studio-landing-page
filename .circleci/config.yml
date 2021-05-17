@@ -108,6 +108,21 @@ jobs:
             - build
             - cdn-lookup-key
 
+  chromatic:
+    executor: node
+    steps:
+      - checkout
+      - npm-install
+      - attach_workspace:
+          at: ~/studio-landing-page
+      - run:
+          name: Chromatic
+          # TODO: auto-accept anything that hits main (add  < --auto-accept-changes=main > to the command)
+          # (mostly for squash & merge commits where a PR is approved)
+          environment:
+            NODE_ENV: 'production'
+          command: npm run chromatic -- --storybook-build-dir=.out --exit-once-uploaded --exit-zero-on-changes
+
   cdn-upload:
     executor: gcp-cli/google
     steps:
@@ -129,6 +144,11 @@ workflows:
       - typescript
       - build-storybook
       - build-app
+      - chromatic:
+          requires:
+            - build-storybook
+            - eslint
+            - typescript
       - cdn-upload:
           requires:
             - build-app
