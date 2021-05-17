@@ -68,6 +68,30 @@ jobs:
           name: TypeScript
           command: npm run typescript:check
 
+  build-storybook:
+    executor: node
+    resource_class: large
+    steps:
+      - checkout
+      - npm-install
+      - restore_cache:
+          name: Restore storybook cache
+          keys:
+            - storybook-cache--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}
+            - storybook-cache--main--{{ checksum ".circleci/config.yml" }}
+      - run:
+          name: Build storybook
+          command: npm run build-storybook -- --quiet
+      - save_cache:
+          name: Save storybook cache
+          key: storybook-cache--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}--{{ epoch }}
+          paths:
+            - node_modules/.cache/storybook
+      - persist_to_workspace:
+          root: ~/studio-landing-page
+          paths:
+            - .out
+
   build-app:
     executor: node
     steps:
@@ -103,6 +127,7 @@ workflows:
     jobs:
       - eslint
       - typescript
+      - build-storybook
       - build-app
       - cdn-upload:
           requires:
