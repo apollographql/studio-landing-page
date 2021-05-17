@@ -22,5 +22,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-unused-vars': 'off',
     'no-nested-ternary': 'off',
+    'no-undef': 'off',
   },
 };

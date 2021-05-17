@@ -17,6 +17,31 @@ executors:
     working_directory: ~/studio-landing-page
 
 jobs:
+  eslint:
+    docker:
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Ensure output directory exists
+          command: mkdir -p /tmp/test-reports/eslint
+      - restore_cache:
+          name: Restore eslint cache
+          keys:
+            - raw-eslint-cache--{{ checksum ".eslintrc.js" }}--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}
+            - raw-eslint-cache--{{ checksum ".eslintrc.js" }}--main--{{ checksum ".circleci/config.yml" }}
+      - run:
+          name: Linter
+          command: npm run lint -- --quiet --format junit --output-file /tmp/test-reports/eslint/results.xml
+      - save_cache:
+          name: Save eslint cache
+          key: raw-eslint-cache--{{ checksum ".eslintrc.js" }}--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}--{{ epoch }}
+          paths:
+            - .eslintcache
+      - store_test_results:
+          path: /tmp/test-reports
+
   build-app:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -66,6 +91,7 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   build-test-deploy:
     jobs:
+      - eslint
       - build-app
       - cdn-upload:
           requires:
