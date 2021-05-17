@@ -17,7 +17,9 @@ export default () => {
     );
   }
 
-  const { graphRef, isConfigured = false } = JSON.parse(window.landingPage);
+  const { graphRef, isConfigured = false } = window.landingPage
+    ? JSON.parse(window.landingPage)
+    : { graphRef: undefined };
   const endpoint = window.location.href;
   // TODO check with glasser what constitutes a configured graph.
 
