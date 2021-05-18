@@ -136,6 +136,7 @@ jobs:
           name: Upload build artifacts to CDN
           command: |
             gsutil -m cp -z "js,css,html,map,txt,svg" -r ~/studio-landing-page/build gs://apollo-server-landing-page/_latest
+            gsutil -m cp -z "js,css,html,map,txt,svg" -r ~/studio-landing-page/build gs://apollo-server-landing-page/$CIRCLE_SHA1
 
 workflows:
   build-test-deploy:
