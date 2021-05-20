@@ -26,7 +26,7 @@ export default ({ endpoint }: { endpoint: string }) => (
       <div
         css={{
           color: '#d9cfff',
-          fontSize: 13,
+          fontSize: 15,
           width: 500,
         }}
       >
