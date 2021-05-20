@@ -17,21 +17,20 @@ export default () => {
     );
   }
 
-  const { graphRef } = window.landingPage
+  const { graphRef, isProd } = window.landingPage
     ? JSON.parse(window.landingPage)
-    : { graphRef: undefined };
-  const isProdEnv = process.env.NODE_ENV === 'production';
+    : { graphRef: undefined, isProd: false };
   const endpoint = window.location.href;
 
   return (
     <LandingPageBackgroundWrapper>
-      {!!graphRef && isProdEnv ? (
+      {!!graphRef && isProd ? (
         <ProdConfigured
           endpoint={endpoint}
           graphName={graphRef.substring(0, graphRef.indexOf('@'))}
           variant={graphRef.substring(graphRef.indexOf('@') + 1)}
         />
-      ) : isProdEnv ? (
+      ) : isProd ? (
         <ProdUnconfigured endpoint={endpoint} />
       ) : (
         <LocalUnconfigured endpoint={endpoint} />
