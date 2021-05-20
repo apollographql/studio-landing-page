@@ -44,9 +44,9 @@ export default ({ endpoint }: { endpoint: string }) => (
         </p>
         <p>You can send queries this graph by sending a POST request to:</p>
         <p>
-          <strong style={{ fontSize: 19, fontFamily: 'monospace' }}>
-            {`\`${endpoint}\``}
-          </strong>
+          <span style={{ fontSize: 19, fontFamily: 'monospace' }}>
+            {endpoint}
+          </span>
         </p>
         <div>
           To customize this landing page, including supressing these
