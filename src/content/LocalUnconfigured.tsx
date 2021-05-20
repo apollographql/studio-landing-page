@@ -139,11 +139,10 @@ export default ({ endpoint }: { endpoint: string }) => (
               position: 'absolute',
               left: 0,
               top: 0,
-              width: 16,
-              height: 16,
+              width: 14,
+              height: 14,
               border: '1px solid #ad9bf6',
               borderRadius: 4,
-              marginTop: -2,
             },
           }}
           className="preference-label"
