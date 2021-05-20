@@ -21,10 +21,11 @@ export default () => {
     ? JSON.parse(window.landingPage)
     : { graphRef: undefined, isProd: false };
   const endpoint = window.location.href;
+  const configured = !!graphRef;
 
   return (
     <LandingPageBackgroundWrapper>
-      {!!graphRef && isProd ? (
+      {configured && isProd ? (
         <ProdConfigured
           endpoint={endpoint}
           graphName={graphRef.substring(0, graphRef.indexOf('@'))}
