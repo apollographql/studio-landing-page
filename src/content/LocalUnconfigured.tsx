@@ -105,7 +105,7 @@ export default ({ endpoint }: { endpoint: string }) => (
         Query on Apollo Studio
       </a>
 
-      <div style={{ fontSize: 13 }}>
+      <div css={{ fontSize: 13 }}>
         <input
           type="checkbox"
           id="preference"
