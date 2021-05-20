@@ -95,14 +95,14 @@ export default ({ endpoint }: { endpoint: string }) => (
             '0px 1px 4px rgba(18, 21, 26, 0.04), inset 0px -1px 0px rgba(18, 21, 26, 0.05), inset 0px 0px 0px 1px rgba(18, 21, 26, 0.2)',
           fontSize: 19,
           transition: 'background-color 0.2s ease-in-out',
-          marginTop: 10,
-          marginBottom: 30,
+          marginTop: 40,
+          marginBottom: 40,
         }}
         href={`https://local.apollo.dev?endpoint=${encodeURIComponent(
           endpoint,
         )}`}
       >
-        Query this server now on Apollo Studio
+        Query on Apollo Studio
       </a>
 
       <div style={{ fontSize: 13 }}>
