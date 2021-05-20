@@ -32,8 +32,9 @@ export default ({ endpoint }: { endpoint: string }) => (
       >
         <h1
           css={{
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: 'bold',
+            color: '#ffffff',
           }}
         >
           Welcome to Apollo Server.
