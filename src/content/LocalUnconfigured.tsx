@@ -95,8 +95,8 @@ export default ({ endpoint }: { endpoint: string }) => (
             '0px 1px 4px rgba(18, 21, 26, 0.04), inset 0px -1px 0px rgba(18, 21, 26, 0.05), inset 0px 0px 0px 1px rgba(18, 21, 26, 0.2)',
           fontSize: 19,
           transition: 'background-color 0.2s ease-in-out',
-          marginTop: 40,
-          marginBottom: 40,
+          marginTop: 48,
+          marginBottom: 24,
         }}
         href={`https://local.apollo.dev?endpoint=${encodeURIComponent(
           endpoint,
