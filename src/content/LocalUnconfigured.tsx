@@ -30,14 +30,14 @@ export default ({ endpoint }: { endpoint: string }) => (
           width: 500,
         }}
       >
-        <span
+        <h1
           css={{
             fontSize: 18,
             fontWeight: 'bold',
           }}
         >
           Welcome to Apollo Server.
-        </span>
+        </h1>
         <p>
           Click the button below for a private query console for this graph.
         </p>
