@@ -26,11 +26,8 @@ export default ({ endpoint }: { endpoint: string }) => (
       <div
         css={{
           color: '#d9cfff',
-          border: '1px solid #7156d9',
-          borderRadius: 8,
-          padding: 10,
           fontSize: 13,
-          width: 450,
+          width: 500,
         }}
       >
         <span
