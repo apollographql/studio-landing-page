@@ -45,7 +45,7 @@ export default ({ endpoint }: { endpoint: string }) => (
         <p>You can send queries this graph by sending a POST request to:</p>
         <p>
           <span
-            style={{
+            css={{
               fontSize: 19,
               fontFamily: 'monospace',
               color: '#ffffff',
