@@ -49,7 +49,9 @@ export default ({ endpoint }: { endpoint: string }) => (
               fontSize: 19,
               fontFamily: 'monospace',
               color: '#ffffff',
-              backgroundColor: 'rgba(0,0,0,0.1)',
+              backgroundColor: 'rgba(15,7,56,0.7)',
+              padding: '8px 16px',
+              borderRadius: 4,
             }}
           >
             {endpoint}
