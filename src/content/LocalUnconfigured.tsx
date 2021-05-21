@@ -132,7 +132,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           className="preference-label"
           htmlFor="preference"
         >
-          Redirect to Studio next time
+          Save this preference
         </label>
       </div>
     </section>
