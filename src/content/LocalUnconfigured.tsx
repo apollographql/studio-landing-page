@@ -118,6 +118,8 @@ export default ({ endpoint }: { endpoint: string }) => (
           }}
           css={{
             opacity: 0,
+            position: 'relative',
+            marginLeft: '-16px',
             // this is a hack for showing our own styled check box
             // https://css-tricks.com/the-checkbox-hack/#custom-designed-radio-buttons-and-checkboxes
             '&:checked + .preference-label:before': {
