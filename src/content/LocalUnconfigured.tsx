@@ -39,7 +39,7 @@ export default ({ endpoint }: { endpoint: string }) => (
             color: '#ffffff',
           }}
         >
-          Welcome to Apollo Server.
+          Ready to explore your graph?
         </h1>
         <p>
           Click the button below for a private query console for this graph.
