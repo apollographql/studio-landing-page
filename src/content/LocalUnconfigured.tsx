@@ -148,10 +148,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           className="preference-label"
           htmlFor="preference"
         >
-          Automatically redirect this browser to{' '}
-          <span id="window-location">
-            {`https://local.apollo.dev?endpoint=${endpoint}`}
-          </span>
+          Redirect to Studio next time
         </label>
       </div>
     </section>
