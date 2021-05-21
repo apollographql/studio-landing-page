@@ -9,6 +9,8 @@ export default ({ endpoint }: { endpoint: string }) => (
       css={{
         width: '140px',
         height: '140px',
+        marginTop: 80,
+        marginBottom: 40,
       }}
     >
       {ApolloIcon}
@@ -149,6 +151,8 @@ export default ({ endpoint }: { endpoint: string }) => (
         // make sure the text appears above the  semicircle
         zIndex: 2,
         maxWidth: 500,
+        marginTop: 'auto',
+        marginBottom: 45,
       }}
     >
       <img
