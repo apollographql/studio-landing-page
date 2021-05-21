@@ -48,12 +48,11 @@ export default ({ endpoint }: { endpoint: string }) => (
         <p>
           <span
             css={{
-              fontSize: 19,
               fontFamily: 'monospace',
-              color: '#ffffff',
               backgroundColor: 'rgba(15,7,56,0.7)',
-              padding: '8px 16px',
+              padding: '4px 8px',
               borderRadius: 4,
+              marginLeft: 8,
             }}
           >
             {endpoint}
