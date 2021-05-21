@@ -57,24 +57,6 @@ export default ({ endpoint }: { endpoint: string }) => (
             {endpoint}
           </span>
         </p>
-        <div>
-          To customize this landing page, including supressing these
-          instructions, visit the
-          <a
-            css={{
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: '#41d9d3',
-              cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
-            }}
-            href="https://www.apollographql.com/docs/apollo-server/getting-started/"
-          >
-            {` docs about configuring Apollo Server.`}
-          </a>
-        </div>
       </div>
       <a
         css={{
@@ -177,7 +159,7 @@ export default ({ endpoint }: { endpoint: string }) => (
         src={InfoIcon}
         alt="info-icon"
       />{' '}
-      Learn more in the{' '}
+      You can customize (or hide) this page. Learn more in the{' '}
       <a
         css={{
           fontWeight: 600,
@@ -188,7 +170,7 @@ export default ({ endpoint }: { endpoint: string }) => (
             textDecoration: 'underline',
           },
         }}
-        href="https://www.apollographql.com/docs/apollo-server/"
+        href="https://www.apollographql.com/docs/apollo-server/getting-started"
       >
         Apollo Server Docs
       </a>
