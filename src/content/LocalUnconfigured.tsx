@@ -84,7 +84,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           endpoint,
         )}`}
       >
-        Query on Apollo Studio
+        Continue to Studio
       </a>
 
       <div css={{ fontSize: 13 }}>
