@@ -23,5 +23,6 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-nested-ternary': 'off',
     'no-undef': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };
