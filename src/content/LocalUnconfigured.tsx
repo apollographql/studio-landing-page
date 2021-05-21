@@ -148,7 +148,7 @@ export default ({ endpoint }: { endpoint: string }) => (
         margin: 10,
         // make sure the text appears above the  semicircle
         zIndex: 2,
-        maxWidth: 400,
+        maxWidth: 500,
       }}
     >
       <img
