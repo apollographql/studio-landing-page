@@ -169,60 +169,29 @@ export default ({ endpoint }: { endpoint: string }) => (
         maxWidth: 400,
       }}
     >
-      <div css={{ paddingBottom: 8 }}>
-        <img src={InfoIcon} alt="info-icon" />
-      </div>
-      <div>
-        Learn more in the{' '}
-        <a
-          css={{
-            fontWeight: 600,
-            textDecoration: 'none',
-            color: '#41d9d3',
-            cursor: 'pointer',
-            '&:hover': {
-              textDecoration: 'underline',
-            },
-          }}
-          href="https://www.apollographql.com/docs/apollo-server/"
-        >
-          Apollo Server Docs
-        </a>
-        <div css={{ paddingTop: 10 }}>
-          <div>Check out the other pillars of the Apollo platform:</div>
-          <div>
-            <a
-              css={{
-                fontWeight: 600,
-                textDecoration: 'none',
-                color: '#41d9d3',
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-              href="https://www.apollographql.com/docs/react/"
-            >
-              Apollo Client
-            </a>{' '}
-            and{' '}
-            <a
-              css={{
-                fontWeight: 600,
-                textDecoration: 'none',
-                color: '#41d9d3',
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-              href="https://www.apollographql.com/docs/studio/"
-            >
-              Apollo Studio
-            </a>
-          </div>
-        </div>
-      </div>
+      <img
+        css={{
+          verticalAlign: 'middle',
+          marginRight: 6,
+        }}
+        src={InfoIcon}
+        alt="info-icon"
+      />{' '}
+      Learn more in the{' '}
+      <a
+        css={{
+          fontWeight: 600,
+          textDecoration: 'none',
+          color: '#41d9d3',
+          cursor: 'pointer',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        }}
+        href="https://www.apollographql.com/docs/apollo-server/"
+      >
+        Apollo Server Docs
+      </a>
     </section>
   </>
 );
