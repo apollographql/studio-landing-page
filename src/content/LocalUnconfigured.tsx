@@ -42,8 +42,8 @@ export default ({ endpoint }: { endpoint: string }) => (
           Ready to explore your graph?
         </h1>
         <p css={{ lineHeight: '24px' }}>
-          Get a private query console for your graph and schema generated docs
-          in Apollo Studio. You can also send queries this graph by sending a
+          Get a private query console and schema-generated docs for your graph
+          in Apollo Studio. You can also send queries to this graph by sending a
           POST request to:
           <span
             css={{
