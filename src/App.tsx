@@ -5,6 +5,8 @@ import LocalUnconfigured from './content/LocalUnconfigured';
 import ProdConfigured from './content/ProdConfigured';
 import ProdUnconfigured from './content/ProdUnconfigured';
 
+import('./test-async').then((fn: any) => fn());
+
 export default () => {
   // https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
   const getCookieValue = (name: string) =>
