@@ -9,8 +9,8 @@ export default ({ endpoint }: { endpoint: string }) => (
       css={{
         width: '140px',
         height: '140px',
-        marginTop: 80,
-        marginBottom: 40,
+        marginTop: 60,
+        marginBottom: 20,
       }}
     >
       {ApolloIcon}
