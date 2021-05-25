@@ -84,7 +84,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           endpoint,
         )}`}
       >
-        Continue to Studio
+        Query your server
       </a>
 
       <div css={{ fontSize: 13 }}>
