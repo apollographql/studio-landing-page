@@ -42,7 +42,7 @@ export default ({ children }: { children: React.ReactNode }) => (
         width: 3500,
         height: 3500,
         top: 'calc(100% - 140px)',
-        boxShadow: '0 -32px 160px 20px rgba(113, 86, 217, 0.72)',
+        boxShadow: '0 -32px 160px 20px rgba(113, 86, 217, 0.50)',
         position: 'absolute',
         left: '50%',
         transform: 'translateX(-50%)',
