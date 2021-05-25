@@ -9,6 +9,8 @@ export default ({ endpoint }: { endpoint: string }) => (
       css={{
         width: '140px',
         height: '140px',
+        marginTop: 60,
+        marginBottom: 20,
       }}
     >
       {ApolloIcon}
@@ -26,26 +28,38 @@ export default ({ endpoint }: { endpoint: string }) => (
       <div
         css={{
           color: '#d9cfff',
-          border: '1px solid #7156d9',
-          borderRadius: 8,
-          padding: 10,
-          fontSize: 13,
+          fontSize: 15,
+          width: 520,
         }}
       >
-        <span
+        <h1
           css={{
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: 'bold',
+            color: '#ffffff',
           }}
         >
           Apollo Server 404
-        </span>
-        <p>You can send queries this graph by sending a POST request to:</p>
-        <div css={{ paddingTop: '1em', paddingBottom: 0 }}>
-          <strong style={{ fontSize: 19, fontFamily: 'monospace' }}>
-            {`\`${endpoint}\``}
-          </strong>
-        </div>
+        </h1>
+        <p css={{ lineHeight: '24px', fontSize: 15 }}>
+          You can send queries this graph by sending a POST request to:
+        </p>
+        <p>
+          <span
+            css={{
+              fontFamily: 'monospace',
+              fontSize: 18,
+              backgroundColor: 'rgba(15,7,56,0.7)',
+              padding: '8px 16px',
+              borderRadius: 4,
+              marginLeft: 8,
+              marginTop: 8,
+              color: '#ffffff',
+            }}
+          >
+            {endpoint}
+          </span>
+        </p>
       </div>
     </section>
 
@@ -60,64 +74,34 @@ export default ({ endpoint }: { endpoint: string }) => (
         margin: 10,
         // make sure the text appears above the  semicircle
         zIndex: 2,
-        maxWidth: 400,
+        maxWidth: 500,
+        marginTop: 'auto',
+        marginBottom: 45,
       }}
     >
-      <div css={{ paddingBottom: 8 }}>
-        <img src={InfoIcon} alt="info-icon" />
-      </div>
-      <div>
-        To customize this landing page, including supressing these instructions,
-        visit the
-        <a
-          css={{
-            fontWeight: 600,
-            textDecoration: 'none',
-            color: '#41d9d3',
-            cursor: 'pointer',
-            '&:hover': {
-              textDecoration: 'underline',
-            },
-          }}
-          href="https://www.apollographql.com/docs/apollo-server/getting-started/"
-        >
-          {` docs about configuring Apollo Server.`}
-        </a>
-      </div>
-      <div css={{ paddingTop: 10 }}>
-        Learn more about the Apollo platform:
-        <div>
-          <a
-            css={{
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: '#41d9d3',
-              cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
-            }}
-            href="https://www.apollographql.com/docs/react/"
-          >
-            Apollo Client
-          </a>{' '}
-          and{' '}
-          <a
-            css={{
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: '#41d9d3',
-              cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
-            }}
-            href="https://www.apollographql.com/docs/studio/"
-          >
-            Apollo Studio
-          </a>
-        </div>
-      </div>
+      <img
+        css={{
+          verticalAlign: 'middle',
+          marginRight: 6,
+        }}
+        src={InfoIcon}
+        alt="info-icon"
+      />{' '}
+      You can customize (or hide) this page. Learn more in the{' '}
+      <a
+        css={{
+          fontWeight: 600,
+          textDecoration: 'none',
+          color: '#41d9d3',
+          cursor: 'pointer',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        }}
+        href="https://www.apollographql.com/docs/apollo-server/getting-started"
+      >
+        Apollo Server Docs
+      </a>
     </section>
   </>
 );
