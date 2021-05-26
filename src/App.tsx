@@ -17,21 +17,21 @@ export default () => {
     );
   }
 
-  const { graphRef, isConfigured = false } = window.landingPage
+  const { graphRef, isProd } = window.landingPage
     ? JSON.parse(window.landingPage)
-    : { graphRef: undefined };
+    : { graphRef: undefined, isProd: false };
   const endpoint = window.location.href;
-  // TODO check with glasser what constitutes a configured graph.
+  const configured = !!graphRef;
 
   return (
     <LandingPageBackgroundWrapper>
-      {!!graphRef && isConfigured ? (
+      {configured && isProd ? (
         <ProdConfigured
           endpoint={endpoint}
           graphName={graphRef.substring(0, graphRef.indexOf('@'))}
           variant={graphRef.substring(graphRef.indexOf('@') + 1)}
         />
-      ) : graphRef ? (
+      ) : isProd ? (
         <ProdUnconfigured endpoint={endpoint} />
       ) : (
         <LocalUnconfigured endpoint={endpoint} />
