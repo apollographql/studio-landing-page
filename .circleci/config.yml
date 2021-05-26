@@ -92,14 +92,30 @@ jobs:
           paths:
             - .out
 
-  build-app:
+  build-latest-app:
     executor: node
     steps:
       - checkout
       - npm-install
       - run:
           name: Build
-          command: '[ -d build ] || npm run build -- --no-progress'
+          command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/_latest/build npm run build -- --no-progress'
+          environment:
+            BUILD_TO_CDN: 'true'
+      - persist_to_workspace:
+          root: ~/studio-landing-page
+          paths:
+            - build
+            - cdn-lookup-key
+
+  build-versioned-app:
+    executor: node
+    steps:
+      - checkout
+      - npm-install
+      - run:
+          name: Build
+          command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/$CIRCLE_SHA1/build npm run build -- --no-progress'
           environment:
             BUILD_TO_CDN: 'true'
       - persist_to_workspace:
@@ -123,7 +139,7 @@ jobs:
             NODE_ENV: 'production'
           command: npm run chromatic -- --storybook-build-dir=.out --exit-once-uploaded --exit-zero-on-changes
 
-  cdn-upload:
+  cdn-upload-latest:
     executor: gcp-cli/google
     steps:
       - gcp-cli/initialize:
@@ -136,6 +152,19 @@ jobs:
           name: Upload build artifacts to CDN
           command: |
             gsutil -m cp -z "js,css,html,map,txt,svg" -r ~/studio-landing-page/build gs://apollo-server-landing-page/_latest
+
+  cdn-upload-versioned:
+    executor: gcp-cli/google
+    steps:
+      - gcp-cli/initialize:
+          gcloud-service-key: GCLOUD_GCS_SERVICE_KEY
+      - gcp-cli/install
+      - checkout
+      - attach_workspace:
+          at: ~/studio-landing-page
+      - run:
+          name: Upload build artifacts to CDN
+          command: |
             gsutil -m cp -z "js,css,html,map,txt,svg" -r ~/studio-landing-page/build gs://apollo-server-landing-page/$CIRCLE_SHA1
 
 workflows:
@@ -144,15 +173,24 @@ workflows:
       - eslint
       - typescript
       - build-storybook
-      - build-app
+      - build-latest-app
       - chromatic:
           requires:
             - build-storybook
             - eslint
             - typescript
-      - cdn-upload:
+      - cdn-upload-latest:
           requires:
-            - build-app
+            - build-latest-app
+          filters:
+            branches:
+              only: main
+      - build-versioned-app:
+          requires:
+            - cdn-upload-latest
+      - cdn-upload-versioned:
+          requires:
+            - build-versioned-app
           filters:
             branches:
               only: main
