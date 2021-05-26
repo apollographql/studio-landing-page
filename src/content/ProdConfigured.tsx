@@ -24,29 +24,36 @@ export default ({
       <div
         css={{
           color: '#d9cfff',
-          border: '1px solid #7156d9',
-          borderRadius: 8,
-          padding: 10,
-          fontSize: 13,
+          fontSize: 15,
+          width: 500,
         }}
       >
-        <span
+        <h1
           css={{
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: 'bold',
+            color: '#ffffff',
+            marginTop: '150px',
           }}
         >
           {`Welcome to the ${graphName} graph API.`}
-        </span>
-        <p>
-          Click the button below for a private query console for this graph.
+        </h1>
+        <p css={{ lineHeight: '24px' }}>
+          Get a private query console and schema-generated docs for your graph
+          in Apollo Studio. You can also send queries to this graph by sending a
+          POST request to:
+          <span
+            css={{
+              fontFamily: 'monospace',
+              backgroundColor: 'rgba(15,7,56,0.7)',
+              padding: '4px 8px',
+              borderRadius: 4,
+              marginLeft: 8,
+            }}
+          >
+            {endpoint}
+          </span>
         </p>
-        <p>You can send queries this graph by sending a POST request to:</p>
-        <div css={{ paddingTop: '1em', paddingBottom: 0 }}>
-          <strong style={{ fontSize: 19, fontFamily: 'monospace' }}>
-            {`\`${endpoint}\``}
-          </strong>
-        </div>
       </div>
       <a
         css={{
@@ -67,12 +74,12 @@ export default ({
             '0px 1px 4px rgba(18, 21, 26, 0.04), inset 0px -1px 0px rgba(18, 21, 26, 0.05), inset 0px 0px 0px 1px rgba(18, 21, 26, 0.2)',
           fontSize: 19,
           transition: 'background-color 0.2s ease-in-out',
-          marginTop: 10,
-          marginBottom: 30,
+          marginTop: 28,
+          marginBottom: 24,
         }}
         href="https://local.apollo.dev"
       >
-        Query this server now
+        Query the server
       </a>
 
       <div style={{ fontSize: 13 }}>
@@ -88,6 +95,8 @@ export default ({
           }}
           css={{
             opacity: 0,
+            position: 'relative',
+            marginLeft: '-16px',
             // this is a hack for showing our own styled check box
             // https://css-tricks.com/the-checkbox-hack/#custom-designed-radio-buttons-and-checkboxes
             '&:checked + .preference-label:before': {
@@ -102,6 +111,7 @@ export default ({
             paddingLeft: 24,
             position: 'relative',
             color: '#d9cfff',
+            lineHeight: '24px',
             // this is a hack for showing our own styled check box
             // https://css-tricks.com/the-checkbox-hack/#custom-designed-radio-buttons-and-checkboxes
             '&:before': {
@@ -109,17 +119,17 @@ export default ({
               position: 'absolute',
               left: 0,
               top: 0,
-              width: 16,
-              height: 16,
+              width: 14,
+              height: 14,
               border: '1px solid #ad9bf6',
               borderRadius: 4,
-              marginTop: -2,
             },
           }}
           className="preference-label"
           htmlFor="preference"
         >
-          Automatically redirect this browser to{' '}
+          Automatically redirect next time to
+          <br />
           <span id="window-location">
             {`https://studio.apollographql.com/${graphName}${
               variant ? `/${variant}` : ''
@@ -140,48 +150,49 @@ export default ({
         margin: 10,
         // make sure the text appears above the  semicircle
         zIndex: 2,
-        maxWidth: 400,
+        maxWidth: 500,
+        marginTop: 'auto',
+        marginBottom: 45,
       }}
     >
-      <div css={{ paddingBottom: 8 }}>
-        <img src={InfoIcon} alt="info-icon" />
-      </div>
-      <div>
-        Check out the{' '}
-        <a
-          css={{
-            fontWeight: 600,
-            textDecoration: 'none',
-            color: '#41d9d3',
-            cursor: 'pointer',
-            '&:hover': {
-              textDecoration: 'underline',
-            },
-          }}
-          href={`https://studio.apollographql.com/${graphName}/dev`}
-        >
-          {`${graphName} developer portal`}
-        </a>
-        <div css={{ paddingTop: 10 }}>
-          <div>Get help:</div>
-          <div>
-            <a
-              css={{
-                fontWeight: 600,
-                textDecoration: 'none',
-                color: '#41d9d3',
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-              href="https://studio.apollographql.com/support"
-            >
-              Contact our support team
-            </a>
-          </div>
-        </div>
-      </div>
+      <img
+        css={{
+          verticalAlign: 'middle',
+          marginRight: 6,
+        }}
+        src={InfoIcon}
+        alt="info-icon"
+      />{' '}
+      Check out the{' '}
+      <a
+        css={{
+          fontWeight: 600,
+          textDecoration: 'none',
+          color: '#41d9d3',
+          cursor: 'pointer',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        }}
+        href={`https://studio.apollographql.com/${graphName}/dev`}
+      >
+        {`${graphName} developer portal`}
+      </a>
+      . Or, get help from our{' '}
+      <a
+        css={{
+          fontWeight: 600,
+          textDecoration: 'none',
+          color: '#41d9d3',
+          cursor: 'pointer',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        }}
+        href="https://studio.apollographql.com/support"
+      >
+        support team
+      </a>
     </section>
   </>
 );

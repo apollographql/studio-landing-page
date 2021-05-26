@@ -9,6 +9,8 @@ export default ({ endpoint }: { endpoint: string }) => (
       css={{
         width: '140px',
         height: '140px',
+        marginTop: 60,
+        marginBottom: 20,
       }}
     >
       {ApolloIcon}
@@ -26,48 +28,35 @@ export default ({ endpoint }: { endpoint: string }) => (
       <div
         css={{
           color: '#d9cfff',
-          border: '1px solid #7156d9',
-          borderRadius: 8,
-          padding: 10,
-          fontSize: 13,
-          width: 450,
+          fontSize: 15,
+          width: 500,
         }}
       >
-        <span
+        <h1
           css={{
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: 'bold',
+            color: '#ffffff',
           }}
         >
-          Welcome to Apollo Server.
-        </span>
-        <p>
-          Click the button below for a private query console for this graph.
-        </p>
-        <p>You can send queries this graph by sending a POST request to:</p>
-        <p>
-          <strong style={{ fontSize: 19, fontFamily: 'monospace' }}>
-            {`\`${endpoint}\``}
-          </strong>
-        </p>
-        <div>
-          To customize this landing page, including supressing these
-          instructions, visit the
-          <a
+          Ready to explore your graph?
+        </h1>
+        <p css={{ lineHeight: '24px' }}>
+          Get a private query console and schema-generated docs for your graph
+          in Apollo Studio. You can also send queries to this graph by sending a
+          POST request to:
+          <span
             css={{
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: '#41d9d3',
-              cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
+              fontFamily: 'monospace',
+              backgroundColor: 'rgba(15,7,56,0.7)',
+              padding: '4px 8px',
+              borderRadius: 4,
+              marginLeft: 8,
             }}
-            href="https://www.apollographql.com/docs/apollo-server/getting-started/"
           >
-            {` docs about configuring Apollo Server.`}
-          </a>
-        </div>
+            {endpoint}
+          </span>
+        </p>
       </div>
       <a
         css={{
@@ -88,17 +77,17 @@ export default ({ endpoint }: { endpoint: string }) => (
             '0px 1px 4px rgba(18, 21, 26, 0.04), inset 0px -1px 0px rgba(18, 21, 26, 0.05), inset 0px 0px 0px 1px rgba(18, 21, 26, 0.2)',
           fontSize: 19,
           transition: 'background-color 0.2s ease-in-out',
-          marginTop: 10,
-          marginBottom: 30,
+          marginTop: 28,
+          marginBottom: 24,
         }}
         href={`https://local.apollo.dev?endpoint=${encodeURIComponent(
           endpoint,
         )}`}
       >
-        Query this server now on Apollo Studio
+        Query your server
       </a>
 
-      <div style={{ fontSize: 13 }}>
+      <div css={{ fontSize: 13 }}>
         <input
           type="checkbox"
           id="preference"
@@ -111,6 +100,8 @@ export default ({ endpoint }: { endpoint: string }) => (
           }}
           css={{
             opacity: 0,
+            position: 'relative',
+            marginLeft: '-16px',
             // this is a hack for showing our own styled check box
             // https://css-tricks.com/the-checkbox-hack/#custom-designed-radio-buttons-and-checkboxes
             '&:checked + .preference-label:before': {
@@ -132,20 +123,16 @@ export default ({ endpoint }: { endpoint: string }) => (
               position: 'absolute',
               left: 0,
               top: 0,
-              width: 16,
-              height: 16,
+              width: 14,
+              height: 14,
               border: '1px solid #ad9bf6',
               borderRadius: 4,
-              marginTop: -2,
             },
           }}
           className="preference-label"
           htmlFor="preference"
         >
-          Automatically redirect this browser to{' '}
-          <span id="window-location">
-            {`https://local.apollo.dev?endpoint=${endpoint}`}
-          </span>
+          Automatically redirect next time
         </label>
       </div>
     </section>
@@ -161,63 +148,34 @@ export default ({ endpoint }: { endpoint: string }) => (
         margin: 10,
         // make sure the text appears above the  semicircle
         zIndex: 2,
-        maxWidth: 400,
+        maxWidth: 500,
+        marginTop: 'auto',
+        marginBottom: 45,
       }}
     >
-      <div css={{ paddingBottom: 8 }}>
-        <img src={InfoIcon} alt="info-icon" />
-      </div>
-      <div>
-        Learn more in the{' '}
-        <a
-          css={{
-            fontWeight: 600,
-            textDecoration: 'none',
-            color: '#41d9d3',
-            cursor: 'pointer',
-            '&:hover': {
-              textDecoration: 'underline',
-            },
-          }}
-          href="https://www.apollographql.com/docs/apollo-server/"
-        >
-          Apollo Server Docs
-        </a>
-        <div css={{ paddingTop: 10 }}>
-          <div>Check out the other pillars of the Apollo platform:</div>
-          <div>
-            <a
-              css={{
-                fontWeight: 600,
-                textDecoration: 'none',
-                color: '#41d9d3',
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-              href="https://www.apollographql.com/docs/react/"
-            >
-              Apollo Client
-            </a>{' '}
-            and{' '}
-            <a
-              css={{
-                fontWeight: 600,
-                textDecoration: 'none',
-                color: '#41d9d3',
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-              href="https://www.apollographql.com/docs/studio/"
-            >
-              Apollo Studio
-            </a>
-          </div>
-        </div>
-      </div>
+      <img
+        css={{
+          verticalAlign: 'middle',
+          marginRight: 6,
+        }}
+        src={InfoIcon}
+        alt="info-icon"
+      />{' '}
+      You can customize (or hide) this page. Learn more in the{' '}
+      <a
+        css={{
+          fontWeight: 600,
+          textDecoration: 'none',
+          color: '#41d9d3',
+          cursor: 'pointer',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        }}
+        href="https://www.apollographql.com/docs/apollo-server/getting-started"
+      >
+        Apollo Server Docs
+      </a>
     </section>
   </>
 );
