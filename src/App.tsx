@@ -17,9 +17,17 @@ export default () => {
     );
   }
 
-  const { graphRef, isProd } = window.landingPage
+  const {
+    graphRef,
+    isProd,
+    apolloStudioEnv,
+  }: {
+    graphRef: string;
+    isProd: boolean;
+    apolloStudioEnv: 'staging' | 'prod';
+  } = window.landingPage
     ? JSON.parse(window.landingPage)
-    : { graphRef: undefined, isProd: false };
+    : { graphRef: undefined, isProd: false, apolloStudioEnv: 'prod' };
   const endpoint = window.location.href;
   const configured = !!graphRef;
 
