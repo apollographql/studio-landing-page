@@ -11,7 +11,7 @@ export default () => {
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
   if (getCookieValue('redirect') === 'true') {
     window.location.replace(
-      `https://local.apollographql.dev?endpoint=${encodeURIComponent(
+      `https://studio.apollographql.com/sandbox?endpoint=${encodeURIComponent(
         window.location.href,
       )}`,
     );
