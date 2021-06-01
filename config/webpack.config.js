@@ -39,9 +39,8 @@ const reactRefreshOverlayEntry = require.resolve(
   'react-dev-utils/refreshOverlayInterop',
 );
 
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
-// makes for a smoother build process.
-const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
+// We want the runtime chunk to be fetched from the CDN, not inline for AS3 plugin
+const shouldInlineRuntimeChunk = false;
 
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
