@@ -291,19 +291,13 @@ module.exports = function (webpackEnv) {
           },
         }),
       ],
-      // Automatically split vendor and commons
-      // https://twitter.com/wSokra/status/969633336732905474
-      // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-      splitChunks: {
-        chunks: 'all',
-        name: isEnvDevelopment,
-      },
-      // Keep the runtime chunk separated to enable long term caching
-      // https://twitter.com/wSokra/status/969679223278505985
-      // https://github.com/facebook/create-react-app/issues/5358
-      runtimeChunk: {
-        name: (entrypoint) => `runtime-${entrypoint.name}`,
-      },
+      // don't split vendor and commons - we just want one js file for versioning purposes,
+      // lets not run into the issue where the browser / cdn has cached file 2/3 but not the others
+      splitChunks: false,
+
+      // Don't seperate the runtime chunk - we just want one js file for versioning purposes,
+      // lets not run into the issue where the browser / cdn has cached file 2/3 but not the others
+      runtimeChunk: false,
     },
     resolve: {
       // This allows you to set a fallback for where webpack should look for modules.
