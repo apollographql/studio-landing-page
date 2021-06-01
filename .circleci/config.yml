@@ -99,7 +99,7 @@ jobs:
       - npm-install
       - run:
           name: Build
-          command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/_latest/build npm run build -- --no-progress'
+          command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/_latest npm run build -- --no-progress'
           environment:
             BUILD_TO_CDN: 'true'
       - persist_to_workspace:
@@ -115,7 +115,7 @@ jobs:
       - npm-install
       - run:
           name: Build
-          command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/$CIRCLE_SHA1/build npm run build -- --no-progress'
+          command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/$CIRCLE_SHA1 npm run build -- --no-progress'
           environment:
             BUILD_TO_CDN: 'true'
       - persist_to_workspace:
@@ -151,7 +151,7 @@ jobs:
       - run:
           name: Upload build artifacts to CDN
           command: |
-            gsutil -m cp -z "js,css,html,map,txt,svg" -r ~/studio-landing-page/build gs://apollo-server-landing-page/_latest
+            gsutil -m rsync -r ~/studio-landing-page/build gs://apollo-server-landing-page/_latest
 
   cdn-upload-versioned:
     executor: gcp-cli/google
@@ -165,7 +165,7 @@ jobs:
       - run:
           name: Upload build artifacts to CDN
           command: |
-            gsutil -m cp -z "js,css,html,map,txt,svg" -r ~/studio-landing-page/build gs://apollo-server-landing-page/$CIRCLE_SHA1
+            gsutil -m rsync -r ~/studio-landing-page/build gs://apollo-server-landing-page/$CIRCLE_SHA1
 
 workflows:
   build-test-deploy:
