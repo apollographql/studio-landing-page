@@ -77,7 +77,7 @@ export default ({
           marginTop: 28,
           marginBottom: 24,
         }}
-        href="https://local.apollo.dev"
+        href="https://studio.apollographql.com/sandbox"
       >
         Query the server
       </a>

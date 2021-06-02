@@ -80,7 +80,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           marginTop: 28,
           marginBottom: 24,
         }}
-        href={`https://local.apollo.dev?endpoint=${encodeURIComponent(
+        href={`https://studio.apollographql.com/sandbox?endpoint=${encodeURIComponent(
           endpoint,
         )}`}
       >
