@@ -28,7 +28,10 @@ const LandingPageStoryWrapper = ({
 
 export const LocalUnconfigured = () => (
   <LandingPageStoryWrapper>
-    <LocalUnconfiguredComponent endpoint="https://localhost:4000" />
+    <LocalUnconfiguredComponent
+      baseUrl="https://studio.apollographql.com"
+      endpoint="https://localhost:4000"
+    />
   </LandingPageStoryWrapper>
 );
 
@@ -41,6 +44,7 @@ export const ProdUnconfigured = () => (
 export const ProdConfigured = () => (
   <LandingPageStoryWrapper>
     <ProdConfiguredComponent
+      baseUrl="https://studio.apollographql.com"
       endpoint="https://localhost:4000"
       graphName="testGraph"
       variant="current"
