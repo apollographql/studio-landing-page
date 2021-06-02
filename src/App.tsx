@@ -30,11 +30,15 @@ export default () => {
     : { graphRef: undefined, isProd: false, apolloStudioEnv: 'prod' };
   const endpoint = window.location.href;
   const configured = !!graphRef;
+  const baseUrl = `https://studio${
+    apolloStudioEnv === 'staging' ? '-staging' : ''
+  }.apollographql.com`;
 
   return (
     <LandingPageBackgroundWrapper>
       {configured && isProd ? (
         <ProdConfigured
+          baseUrl={baseUrl}
           endpoint={endpoint}
           graphName={graphRef.substring(0, graphRef.indexOf('@'))}
           variant={graphRef.substring(graphRef.indexOf('@') + 1)}
@@ -42,7 +46,7 @@ export default () => {
       ) : isProd ? (
         <ProdUnconfigured endpoint={endpoint} />
       ) : (
-        <LocalUnconfigured endpoint={endpoint} />
+        <LocalUnconfigured baseUrl={baseUrl} endpoint={endpoint} />
       )}
     </LandingPageBackgroundWrapper>
   );
