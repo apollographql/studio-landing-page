@@ -46,8 +46,7 @@ export const ProdConfigured = () => (
     <ProdConfiguredComponent
       baseUrl="https://studio.apollographql.com"
       endpoint="https://localhost:4000"
-      graphName="testGraph"
-      variant="current"
+      graphRef="testGraph@staging"
     />
   </LandingPageStoryWrapper>
 );
