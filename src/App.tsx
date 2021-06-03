@@ -25,9 +25,13 @@ export default () => {
     graphRef: string;
     isProd: boolean;
     apolloStudioEnv: 'staging' | 'prod';
-  } = window.landingPage
-    ? JSON.parse(window.landingPage)
-    : { graphRef: undefined, isProd: false, apolloStudioEnv: 'prod' };
+  } = {
+    graphRef: undefined,
+    isProd: false,
+    apolloStudioEnv: 'prod',
+    ...(window.landingPage &&
+      JSON.parse(decodeURIComponent(window.landingPage))),
+  };
   const endpoint = window.location.href;
   const configured = !!graphRef;
   const baseUrl = `https://studio${
