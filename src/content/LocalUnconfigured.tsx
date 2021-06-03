@@ -3,7 +3,13 @@ import React from 'react';
 import ApolloIcon from '../assets/ApolloIcon';
 import InfoIcon from '../assets/info-icon.svg';
 
-export default ({ endpoint }: { endpoint: string }) => (
+export default ({
+  endpoint,
+  baseUrl,
+}: {
+  endpoint: string;
+  baseUrl: string;
+}) => (
   <>
     <section
       css={{
@@ -80,9 +86,7 @@ export default ({ endpoint }: { endpoint: string }) => (
           marginTop: 28,
           marginBottom: 24,
         }}
-        href={`https://studio.apollographql.com/sandbox?endpoint=${encodeURIComponent(
-          endpoint,
-        )}`}
+        href={`${baseUrl}/sandbox?endpoint=${encodeURIComponent(endpoint)}`}
       >
         Query your server
       </a>

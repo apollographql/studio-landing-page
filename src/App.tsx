@@ -17,16 +17,32 @@ export default () => {
     );
   }
 
-  const { graphRef, isProd } = window.landingPage
-    ? JSON.parse(window.landingPage)
-    : { graphRef: undefined, isProd: false };
+  const {
+    graphRef,
+    isProd,
+    apolloStudioEnv,
+  }: {
+    graphRef: string;
+    isProd: boolean;
+    apolloStudioEnv: 'staging' | 'prod';
+  } = {
+    graphRef: undefined,
+    isProd: false,
+    apolloStudioEnv: 'prod',
+    ...(window.landingPage &&
+      JSON.parse(decodeURIComponent(window.landingPage))),
+  };
   const endpoint = window.location.href;
   const configured = !!graphRef;
+  const baseUrl = `https://studio${
+    apolloStudioEnv === 'staging' ? '-staging' : ''
+  }.apollographql.com`;
 
   return (
     <LandingPageBackgroundWrapper>
       {configured && isProd ? (
         <ProdConfigured
+          baseUrl={baseUrl}
           endpoint={endpoint}
           graphName={graphRef.substring(0, graphRef.indexOf('@'))}
           variant={graphRef.substring(graphRef.indexOf('@') + 1)}
@@ -34,7 +50,7 @@ export default () => {
       ) : isProd ? (
         <ProdUnconfigured endpoint={endpoint} />
       ) : (
-        <LocalUnconfigured endpoint={endpoint} />
+        <LocalUnconfigured baseUrl={baseUrl} endpoint={endpoint} />
       )}
     </LandingPageBackgroundWrapper>
   );

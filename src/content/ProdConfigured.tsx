@@ -6,10 +6,12 @@ export default ({
   endpoint,
   graphName,
   variant,
+  baseUrl,
 }: {
   endpoint: string;
   graphName: string;
   variant: string | undefined;
+  baseUrl: string;
 }) => (
   <>
     <section
@@ -77,7 +79,7 @@ export default ({
           marginTop: 28,
           marginBottom: 24,
         }}
-        href="https://studio.apollographql.com/sandbox"
+        href={`${baseUrl}/sandbox`}
       >
         Query the server
       </a>
@@ -131,9 +133,7 @@ export default ({
           Automatically redirect next time to
           <br />
           <span id="window-location">
-            {`https://studio.apollographql.com/${graphName}${
-              variant ? `/${variant}` : ''
-            }`}
+            {`${baseUrl}/${graphName}${variant ? `/${variant}` : ''}`}
           </span>
         </label>
       </div>
@@ -174,7 +174,7 @@ export default ({
             textDecoration: 'underline',
           },
         }}
-        href={`https://studio.apollographql.com/${graphName}/dev`}
+        href={`${baseUrl}/${graphName}/dev`}
       >
         {`${graphName} developer portal`}
       </a>
@@ -189,7 +189,7 @@ export default ({
             textDecoration: 'underline',
           },
         }}
-        href="https://studio.apollographql.com/support"
+        href={`${baseUrl}/support`}
       >
         support team
       </a>
