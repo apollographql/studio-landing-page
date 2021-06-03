@@ -192,6 +192,13 @@ function build(previousFileSizes) {
         warnings: messages.warnings,
       };
 
+      // Write the SHA to the build path. We reference this in the landing page
+      // docs as an URL folks can look at if they want to find a version they can
+      // pin in their server.
+      if (process.env.CIRCLE_SHA1) {
+        fs.writeFileSync(paths.appBuild + '/version.txt', process.env.CIRCLE_SHA1 + '\n');
+      }
+
       if (writeStatsJson) {
         return bfj
           .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
