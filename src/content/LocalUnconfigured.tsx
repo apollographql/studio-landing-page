@@ -97,9 +97,11 @@ export default ({
           id="preference"
           onChange={(event) => {
             if (event.target.checked) {
-              document.cookie = 'redirect=true';
+              document.cookie =
+                'apollo-server-landing-page-redirect-to-studio=true';
             } else {
-              document.cookie = 'redirect=false';
+              document.cookie =
+                'apollo-server-landing-page-redirect-to-studio=false';
             }
           }}
           css={{

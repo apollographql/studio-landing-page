@@ -11,7 +11,7 @@ export default () => {
     isProd,
     apolloStudioEnv,
   }: {
-    graphRef: string;
+    graphRef: string | undefined;
     isProd: boolean;
     apolloStudioEnv: 'staging' | 'prod';
   } = {
@@ -22,7 +22,6 @@ export default () => {
       JSON.parse(decodeURIComponent(window.landingPage))),
   };
   const endpoint = window.location.href;
-  const configured = !!graphRef;
   const baseUrl = `https://studio${
     apolloStudioEnv === 'staging' ? '-staging' : ''
   }.apollographql.com`;
@@ -30,20 +29,27 @@ export default () => {
   // https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
   const getCookieValue = (name: string) =>
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
-  if (getCookieValue('redirect') === 'true') {
-    window.location.replace(
-      `${baseUrl}/sandbox?endpoint=${encodeURIComponent(window.location.href)}`,
-    );
+  if (
+    getCookieValue('apollo-server-landing-page-redirect-to-studio') === 'true'
+  ) {
+    if (isProd && !!graphRef) {
+      window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
+    } else {
+      window.location.replace(
+        `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
+          window.location.href,
+        )}`,
+      );
+    }
   }
 
   return (
     <LandingPageBackgroundWrapper>
-      {configured && isProd ? (
+      {isProd && !!graphRef ? (
         <ProdConfigured
           baseUrl={baseUrl}
           endpoint={endpoint}
-          graphName={graphRef.substring(0, graphRef.indexOf('@'))}
-          variant={graphRef.substring(graphRef.indexOf('@') + 1)}
+          graphRef={graphRef}
         />
       ) : isProd ? (
         <ProdUnconfigured endpoint={endpoint} />
