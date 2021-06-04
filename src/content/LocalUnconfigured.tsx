@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
 import ApolloIcon from '../assets/ApolloIcon';
 import InfoIcon from '../assets/info-icon.svg';
@@ -140,20 +141,36 @@ export default ({
         }}
       >
         <p>Or, query this graph directly:</p>
-        <p
-          css={{
-            fontFamily: 'monospace',
-            backgroundColor: 'rgba(15,7,56,0.7)',
-            padding: '12px 14px 12px 28px',
-            borderRadius: 4,
-            fontSize: 13,
-            textAlign: 'left',
-          }}
+        <div
+          css={css`
+            font-family: monospace;
+            background-color: rgba(15, 7, 56, 0.7);
+            padding: 12px 14px 12px 28px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 18px;
+            text-align: left;
+            position: relative;
+
+            &:before {
+              content: '$';
+              position: absolute;
+              top: 12px;
+              left: 12px;
+              color: #7156d9;
+              font-size: 16px;
+            }
+          `}
         >
-          curl --request POST <br />
-          --header a bunch of words here and here <br />
-          --url http://localhost:4000 <br /> --data sample query can go here
-        </p>
+          <pre css={{ margin: 0 }}>{`curl --request POST \\ `}</pre>
+          <pre
+            css={{ margin: 0 }}
+          >{`  --header 'content-type: application/json' \\ `}</pre>
+          <pre css={{ margin: 0 }}>{`  --url 'http://localhost:4000' \\ `}</pre>
+          <pre
+            css={{ margin: 0 }}
+          >{`  --data '{"query":"query { __typename }"}' `}</pre>
+        </div>
       </div>
     </section>
 
