@@ -17,7 +17,7 @@ export default (
       <path
         style={{
           transformOrigin: '100px 100px',
-          animation: 'spin 6s linear infinite',
+          animation: 'spin 3s cubic-bezier(0.75, 0, .25, 1) infinite',
         }}
         id="logo-spin"
         fill="white"
