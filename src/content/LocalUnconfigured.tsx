@@ -127,7 +127,7 @@ export default ({
           className="preference-label"
           htmlFor="preference"
         >
-          Automatically redirect next time
+          Automatically redirect to Studio next time
         </label>
       </div>
 
