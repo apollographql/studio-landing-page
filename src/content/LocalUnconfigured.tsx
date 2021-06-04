@@ -48,9 +48,9 @@ export default ({
         >
           Ready to explore your graph?
         </h1>
-        <p css={{ lineHeight: '24px', maxWidth: '328px', margin: '0 auto' }}>
-          Get a private query console and schema-generated docs for your graph
-          in Apollo Studio.
+        <p css={{ lineHeight: '24px', maxWidth: '350px', margin: '0 auto' }}>
+          Get a free private query console and schema-generated docs for your
+          graph in Apollo Studio.
         </p>
       </div>
       <a
