@@ -47,21 +47,9 @@ export default ({
         >
           Ready to explore your graph?
         </h1>
-        <p css={{ lineHeight: '24px' }}>
+        <p css={{ lineHeight: '24px', maxWidth: '328px', margin: '0 auto' }}>
           Get a private query console and schema-generated docs for your graph
-          in Apollo Studio. You can also send queries to this graph by sending a
-          POST request to:
-          <span
-            css={{
-              fontFamily: 'monospace',
-              backgroundColor: 'rgba(15,7,56,0.7)',
-              padding: '4px 8px',
-              borderRadius: 4,
-              marginLeft: 8,
-            }}
-          >
-            {endpoint}
-          </span>
+          in Apollo Studio.
         </p>
       </div>
       <a
@@ -140,6 +128,32 @@ export default ({
         >
           Automatically redirect next time
         </label>
+      </div>
+
+      <div
+        css={{
+          borderTop: '1px solid #7256D9',
+          marginTop: 20,
+          width: 400,
+          color: '#D9CFFF',
+          fontSize: 15,
+        }}
+      >
+        <p>Or, query this graph directly:</p>
+        <p
+          css={{
+            fontFamily: 'monospace',
+            backgroundColor: 'rgba(15,7,56,0.7)',
+            padding: '12px 14px 12px 28px',
+            borderRadius: 4,
+            fontSize: 13,
+            textAlign: 'left',
+          }}
+        >
+          curl --request POST <br />
+          --header a bunch of words here and here <br />
+          --url http://localhost:4000 <br /> --data sample query can go here
+        </p>
       </div>
     </section>
 
