@@ -15,8 +15,7 @@ export default ({
       css={{
         width: '140px',
         height: '140px',
-        marginTop: 60,
-        marginBottom: 20,
+        marginTop: 30,
       }}
     >
       {ApolloIcon}
@@ -43,6 +42,7 @@ export default ({
             fontSize: 24,
             fontWeight: 'bold',
             color: '#ffffff',
+            marginBottom: 8,
           }}
         >
           Ready to explore your graph?
@@ -133,7 +133,7 @@ export default ({
       <div
         css={{
           borderTop: '1px solid #7256D9',
-          marginTop: 20,
+          marginTop: 40,
           width: 400,
           color: '#D9CFFF',
           fontSize: 15,
