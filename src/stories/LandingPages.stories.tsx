@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
+import { css, Global } from '@emotion/react';
 import LocalUnconfiguredComponent from '../content/LocalUnconfigured';
 import ProdUnconfiguredComponent from '../content/ProdUnconfigured';
 import ProdConfiguredComponent from '../content/ProdConfigured';
@@ -7,46 +8,43 @@ import LandingPageBackgroundWrapper from '../components/LandingPageBackgroundWra
 
 export default {
   title: 'Studio Landing Page/Landing Pages',
+  parameters: {
+    layout: 'fullscreen',
+  },
+  decorators: [
+    (storyFn: () => React.ReactElement<unknown>) => (
+      <>
+        <Global
+          styles={css`
+            html,
+            body,
+            #root {
+              height: 100%;
+              margin: 0;
+            }
+          `}
+        />
+        <LandingPageBackgroundWrapper>{storyFn()}</LandingPageBackgroundWrapper>
+      </>
+    ),
+  ],
 } as Meta;
 
-const LandingPageStoryWrapper = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => (
-  <div
-    style={{
-      width: '100vw',
-      height: '100vh',
-      overflowX: 'hidden',
-      overflowY: 'auto',
-    }}
-  >
-    <LandingPageBackgroundWrapper>{children}</LandingPageBackgroundWrapper>
-  </div>
-);
-
 export const LocalUnconfigured = () => (
-  <LandingPageStoryWrapper>
-    <LocalUnconfiguredComponent
-      baseUrl="https://studio.apollographql.com"
-      endpoint="https://localhost:4000"
-    />
-  </LandingPageStoryWrapper>
+  <LocalUnconfiguredComponent
+    baseUrl="https://studio.apollographql.com"
+    endpoint="https://localhost:4000"
+  />
 );
 
 export const ProdUnconfigured = () => (
-  <LandingPageStoryWrapper>
-    <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
-  </LandingPageStoryWrapper>
+  <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
 );
 
 export const ProdConfigured = () => (
-  <LandingPageStoryWrapper>
-    <ProdConfiguredComponent
-      baseUrl="https://studio.apollographql.com"
-      endpoint="https://localhost:4000"
-      graphRef="testGraph@staging"
-    />
-  </LandingPageStoryWrapper>
+  <ProdConfiguredComponent
+    baseUrl="https://studio.apollographql.com"
+    endpoint="https://localhost:4000"
+    graphRef="testGraph@staging"
+  />
 );
