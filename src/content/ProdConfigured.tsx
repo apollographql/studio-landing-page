@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
 import InfoIcon from '../assets/info-icon.svg';
 
@@ -20,7 +21,7 @@ export default ({
     <>
       <section
         css={{
-          // make sure the text appears above the  semicircle
+          // make sure the text appears above the semicircle
           zIndex: 2,
           display: 'flex',
           alignItems: 'center',
@@ -39,26 +40,15 @@ export default ({
               fontSize: 24,
               fontWeight: 'bold',
               color: '#ffffff',
-              marginTop: '150px',
+              marginTop: 100,
+              marginBottom: 8,
             }}
           >
             {`Welcome to the ${graphName} graph API.`}
           </h1>
-          <p css={{ lineHeight: '24px' }}>
-            Get a private query console and schema-generated docs for your graph
-            in Apollo Studio. You can also send queries to this graph by sending
-            a POST request to:
-            <span
-              css={{
-                fontFamily: 'monospace',
-                backgroundColor: 'rgba(15,7,56,0.7)',
-                padding: '4px 8px',
-                borderRadius: 4,
-                marginLeft: 8,
-              }}
-            >
-              {endpoint}
-            </span>
+          <p css={{ lineHeight: '24px', maxWidth: '350px', margin: '0 auto' }}>
+            Get a free private query console and schema-generated docs for your
+            graph in Apollo Studio.
           </p>
         </div>
         <a
@@ -85,7 +75,7 @@ export default ({
           }}
           href={`${baseUrl}/graph/${graphRef}/explorer`}
         >
-          Query the server
+          Query your server
         </a>
 
         <div style={{ fontSize: 13 }}>
@@ -136,10 +126,52 @@ export default ({
             className="preference-label"
             htmlFor="preference"
           >
-            Automatically redirect next time to
-            <br />
-            <span id="window-location">{`${baseUrl}/graph/${graphRef}/explorer`}</span>
+            Automatically redirect to Studio next time
           </label>
+        </div>
+
+        <div
+          css={{
+            borderTop: '1px solid #7256D9',
+            marginTop: 40,
+            width: 400,
+            color: '#D9CFFF',
+            fontSize: 15,
+          }}
+        >
+          <p>Or, query this graph directly:</p>
+          <div
+            css={css`
+              font-family: monospace;
+              background-color: rgba(15, 7, 56, 0.7);
+              padding: 12px 14px 12px 28px;
+              border-radius: 4px;
+              font-size: 13px;
+              line-height: 18px;
+              text-align: left;
+              position: relative;
+
+              &:before {
+                content: '$';
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                color: #7156d9;
+                font-size: 16px;
+              }
+            `}
+          >
+            <pre css={{ margin: 0 }}>{`curl --request POST \\ `}</pre>
+            <pre
+              css={{ margin: 0 }}
+            >{`  --header 'content-type: application/json' \\ `}</pre>
+            <pre
+              css={{ margin: 0 }}
+            >{`  --url 'http://localhost:4000' \\ `}</pre>
+            <pre
+              css={{ margin: 0 }}
+            >{`  --data '{"query":"query { __typename }"}' `}</pre>
+          </div>
         </div>
       </section>
 
@@ -167,7 +199,7 @@ export default ({
           src={InfoIcon}
           alt="info-icon"
         />{' '}
-        Check out the{' '}
+        You can customize (or hide) this page. Learn more in the{' '}
         <a
           css={{
             fontWeight: 600,
@@ -178,24 +210,9 @@ export default ({
               textDecoration: 'underline',
             },
           }}
-          href={`${baseUrl}/graph/${graphRef}`}
+          href="https://www.apollographql.com/docs/apollo-server/getting-started"
         >
-          {`${graphName} developer portal`}
-        </a>
-        . Or, get help from our{' '}
-        <a
-          css={{
-            fontWeight: 600,
-            textDecoration: 'none',
-            color: '#41d9d3',
-            cursor: 'pointer',
-            '&:hover': {
-              textDecoration: 'underline',
-            },
-          }}
-          href={`${baseUrl}/support`}
-        >
-          support team
+          Apollo Server Docs
         </a>
       </section>
     </>
