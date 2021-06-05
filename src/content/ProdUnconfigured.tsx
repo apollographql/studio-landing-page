@@ -79,7 +79,11 @@ export default ({ endpoint }: { endpoint: string }) => (
           <pre
             css={{ margin: 0 }}
           >{`  --header 'content-type: application/json' \\ `}</pre>
-          <pre css={{ margin: 0 }}>{`  --url 'http://localhost:4000' \\ `}</pre>
+          <pre css={{ margin: 0 }}>
+            {`  --url '`}
+            {endpoint}
+            {`' \\ `}
+          </pre>
           <pre
             css={{ margin: 0 }}
           >{`  --data '{"query":"query { __typename }"}' `}</pre>
