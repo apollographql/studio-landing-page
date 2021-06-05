@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css, Global } from '@emotion/react';
 import React from 'react';
 import LandingPageBackgroundWrapper from './components/LandingPageBackgroundWrapper';
 import LocalUnconfigured from './content/LocalUnconfigured';
@@ -44,18 +45,30 @@ export default () => {
   }
 
   return (
-    <LandingPageBackgroundWrapper>
-      {isProd && !!graphRef ? (
-        <ProdConfigured
-          baseUrl={baseUrl}
-          endpoint={endpoint}
-          graphRef={graphRef}
-        />
-      ) : isProd ? (
-        <ProdUnconfigured endpoint={endpoint} />
-      ) : (
-        <LocalUnconfigured baseUrl={baseUrl} endpoint={endpoint} />
-      )}
-    </LandingPageBackgroundWrapper>
+    <>
+      <Global
+        styles={css`
+          html,
+          body,
+          #react-root {
+            height: 100%;
+            margin: 0;
+          }
+        `}
+      />
+      <LandingPageBackgroundWrapper>
+        {isProd && !!graphRef ? (
+          <ProdConfigured
+            baseUrl={baseUrl}
+            endpoint={endpoint}
+            graphRef={graphRef}
+          />
+        ) : isProd ? (
+          <ProdUnconfigured endpoint={endpoint} />
+        ) : (
+          <LocalUnconfigured baseUrl={baseUrl} endpoint={endpoint} />
+        )}
+      </LandingPageBackgroundWrapper>
+    </>
   );
 };
