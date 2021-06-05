@@ -19,7 +19,7 @@ export default ({ endpoint }: { endpoint: string }) => (
 
     <section
       css={{
-        // make sure the text appears above the  semicircle
+        // make sure the text appears above the semicircle
         zIndex: 2,
         display: 'flex',
         alignItems: 'center',
