@@ -1,6 +1,7 @@
+import { css, Global } from '@emotion/react';
 import React from 'react';
 import BackgroundTexture from '../assets/background-texture.png';
-
+import GlowyPlanet from './GlowyPlanet';
 /** @jsxImportSource @emotion/react */
 
 export default ({ children }: { children: React.ReactNode }) => (
@@ -33,21 +34,6 @@ export default ({ children }: { children: React.ReactNode }) => (
     }}
   >
     {children}
-    {
-      // the half circle on the bottom of the page
-    }
-    <div
-      css={{
-        borderRadius: 1750,
-        width: 3500,
-        height: 3500,
-        top: 'calc(100% - 140px)',
-        boxShadow: '0 -32px 160px 20px rgba(113, 86, 217, 0.50)',
-        position: 'absolute',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        backgroundColor: '#2d1f66',
-      }}
-    />
+    <GlowyPlanet />
   </div>
 );
