@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
+import { prodRedirectCookie } from '../App';
 import InfoIcon from '../assets/info-icon.svg';
 
 export default ({
@@ -94,11 +95,9 @@ export default ({
             id="preference"
             onChange={(event) => {
               if (event.target.checked) {
-                document.cookie =
-                  'apollo-server-landing-page-redirect-to-studio=true';
+                document.cookie = `${prodRedirectCookie}=true`;
               } else {
-                document.cookie =
-                  'apollo-server-landing-page-redirect-to-studio=false';
+                document.cookie = `${prodRedirectCookie}=false`;
               }
             }}
             css={{
