@@ -5,6 +5,11 @@ import LocalUnconfigured from './content/LocalUnconfigured';
 import ProdConfigured from './content/ProdConfigured';
 import ProdUnconfigured from './content/ProdUnconfigured';
 
+export const prodRedirectCookie =
+  'apollo-server-landing-page-redirect-to-studio-prod';
+export const localRedirectCookie =
+  'apollo-server-landing-page-redirect-to-studio-local';
+
 export default () => {
   const {
     graphRef,
@@ -25,22 +30,16 @@ export default () => {
   const baseUrl = `https://studio${
     apolloStudioEnv === 'staging' ? '-staging' : ''
   }.apollographql.com`;
-
   // https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
   const getCookieValue = (name: string) =>
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
-  if (
-    getCookieValue('apollo-server-landing-page-redirect-to-studio') === 'true'
-  ) {
-    if (isProd && !!graphRef) {
-      window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
-    } else {
-      window.location.replace(
-        `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
-          window.location.href,
-        )}`,
-      );
-    }
+
+  if (isProd && !!graphRef && getCookieValue(prodRedirectCookie) === 'true') {
+    window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
+  } else if (getCookieValue(localRedirectCookie) === 'true') {
+    window.location.replace(
+      `${baseUrl}/sandbox?endpoint=${encodeURIComponent(window.location.href)}`,
+    );
   }
 
   return (
