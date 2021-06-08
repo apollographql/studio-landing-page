@@ -6,90 +6,100 @@ import InfoIcon from '../assets/info-icon.svg';
 
 export default ({ endpoint }: { endpoint: string }) => (
   <>
-    <section
-      css={{
-        width: '140px',
-        height: '140px',
-        marginTop: 80,
-        marginBottom: 40,
-      }}
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+      `}
     >
-      {ApolloIcon}
-    </section>
-
-    <section
-      css={{
-        // make sure the text appears above the semicircle
-        zIndex: 2,
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <div
+      <section
         css={{
-          color: '#d9cfff',
-          fontSize: 15,
-          width: 520,
+          width: '140px',
+          height: '140px',
+          marginTop: 80,
+          marginBottom: 40,
         }}
       >
-        <h1
+        {ApolloIcon}
+      </section>
+
+      <section
+        css={{
+          // make sure the text appears above the semicircle
+          zIndex: 2,
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <div
           css={{
-            fontSize: 38,
-            fontWeight: 'bold',
-            color: '#ffffff',
+            color: '#d9cfff',
+            fontSize: 15,
+            width: 520,
           }}
         >
-          Apollo Server 404
-        </h1>
-      </div>
-
-      <div
-        css={{
-          borderTop: '1px solid #7256D9',
-          marginTop: 20,
-          width: 400,
-          color: '#D9CFFF',
-          fontSize: 15,
-        }}
-      >
-        <p>Query this graph directly:</p>
-        <div
-          css={css`
-            font-family: monospace;
-            background-color: rgba(15, 7, 56, 0.7);
-            padding: 12px 14px 12px 28px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 18px;
-            text-align: left;
-            position: relative;
-
-            &:before {
-              content: '$';
-              position: absolute;
-              top: 12px;
-              left: 12px;
-              color: #7156d9;
-              font-size: 16px;
-            }
-          `}
-        >
-          <pre css={{ margin: 0 }}>{`curl --request POST \\ `}</pre>
-          <pre
-            css={{ margin: 0 }}
-          >{`  --header 'content-type: application/json' \\ `}</pre>
-          <pre css={{ margin: 0 }}>
-            {`  --url '`}
-            {endpoint}
-            {`' \\ `}
-          </pre>
-          <pre
-            css={{ margin: 0 }}
-          >{`  --data '{"query":"query { __typename }"}' `}</pre>
+          <h1
+            css={{
+              fontSize: 38,
+              fontWeight: 'bold',
+              color: '#ffffff',
+            }}
+          >
+            Apollo Server 404
+          </h1>
         </div>
-      </div>
-    </section>
+
+        <div
+          css={{
+            borderTop: '1px solid #7256D9',
+            marginTop: 20,
+            width: 400,
+            color: '#D9CFFF',
+            fontSize: 15,
+          }}
+        >
+          <p>Query this graph directly:</p>
+          <div
+            css={css`
+              font-family: monospace;
+              background-color: rgba(15, 7, 56, 0.7);
+              padding: 12px 14px 12px 28px;
+              border-radius: 4px;
+              font-size: 13px;
+              line-height: 18px;
+              text-align: left;
+              position: relative;
+
+              &:before {
+                content: '$';
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                color: #7156d9;
+                font-size: 16px;
+              }
+            `}
+          >
+            <pre css={{ margin: 0 }}>{`curl --request POST \\ `}</pre>
+            <pre
+              css={{ margin: 0 }}
+            >{`  --header 'content-type: application/json' \\ `}</pre>
+            <pre css={{ margin: 0 }}>
+              {`  --url '`}
+              {endpoint}
+              {`' \\ `}
+            </pre>
+            <pre
+              css={{ margin: 0 }}
+            >{`  --data '{"query":"query { __typename }"}' `}</pre>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <section
       css={{
@@ -103,7 +113,7 @@ export default ({ endpoint }: { endpoint: string }) => (
         // make sure the text appears above the  semicircle
         zIndex: 2,
         maxWidth: 500,
-        marginTop: 'auto',
+        marginTop: 100,
         marginBottom: 45,
       }}
     >
