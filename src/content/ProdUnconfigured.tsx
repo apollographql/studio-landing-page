@@ -17,17 +17,6 @@ export default ({ endpoint }: { endpoint: string }) => (
     >
       <section
         css={{
-          width: '140px',
-          height: '140px',
-          marginTop: 80,
-          marginBottom: 40,
-        }}
-      >
-        {ApolloIcon}
-      </section>
-
-      <section
-        css={{
           // make sure the text appears above the semicircle
           zIndex: 2,
           display: 'flex',
@@ -37,32 +26,13 @@ export default ({ endpoint }: { endpoint: string }) => (
       >
         <div
           css={{
-            color: '#d9cfff',
-            fontSize: 15,
-            width: 520,
-          }}
-        >
-          <h1
-            css={{
-              fontSize: 38,
-              fontWeight: 'bold',
-              color: '#ffffff',
-            }}
-          >
-            Apollo Server 404
-          </h1>
-        </div>
-
-        <div
-          css={{
-            borderTop: '1px solid #7256D9',
             marginTop: 20,
             width: 400,
             color: '#D9CFFF',
             fontSize: 15,
           }}
         >
-          <p>Query this graph directly:</p>
+          <p>Send a POST request to query this endpoint</p>
           <div
             css={css`
               font-family: monospace;
@@ -103,11 +73,11 @@ export default ({ endpoint }: { endpoint: string }) => (
 
     <section
       css={{
+        display: 'flex',
+        justifyContent: 'center',
         color: '#d9cfff',
-        border: '1px solid #7156d9',
         borderRadius: '8px',
         padding: 10,
-        flex: 'none',
         fontSize: 13,
         margin: 10,
         // make sure the text appears above the  semicircle
@@ -125,12 +95,12 @@ export default ({ endpoint }: { endpoint: string }) => (
         src={InfoIcon}
         alt="info-icon"
       />{' '}
-      You can customize (or hide) this page. Learn more in the{' '}
+      This page can be customized or hidden. Learn more in
       <a
         css={{
+          marginLeft: '0.4em',
           fontWeight: 600,
-          textDecoration: 'none',
-          color: '#41d9d3',
+          color: '#d9cfff',
           cursor: 'pointer',
           '&:hover': {
             textDecoration: 'underline',
@@ -138,7 +108,7 @@ export default ({ endpoint }: { endpoint: string }) => (
         }}
         href="https://www.apollographql.com/docs/apollo-server/getting-started"
       >
-        Apollo Server Docs
+        Apollo Server’s Docs
       </a>
     </section>
   </>
