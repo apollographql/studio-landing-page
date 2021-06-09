@@ -18,6 +18,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
+    'react/no-unescaped-entities': 'off',
     'no-use-before-define': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-unused-vars': 'off',

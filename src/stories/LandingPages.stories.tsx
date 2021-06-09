@@ -37,6 +37,13 @@ export const LocalUnconfigured = () => (
   />
 );
 
+export const LocalUnconfiguredWithReallyLongEndpoint = () => (
+  <LocalUnconfiguredComponent
+    baseUrl="https://studio.apollographql.com"
+    endpoint="https://499d67ec-9864-4597-bbc1-8d21f55f88b3.35a76308-3181-4efd-a46a-2a5eb6e72ffb.com/api/graphql"
+  />
+);
+
 export const ProdUnconfigured = () => (
   <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
 );
