@@ -143,7 +143,7 @@ export default ({
           css={{
             borderTop: '1px solid #7256D9',
             marginTop: 40,
-            width: 400,
+            minWidth: 400,
             color: '#D9CFFF',
             fontSize: 15,
           }}
@@ -170,18 +170,16 @@ export default ({
               }
             `}
           >
-            <pre css={{ margin: 0 }}>{`curl --request POST \\ `}</pre>
-            <pre
-              css={{ margin: 0 }}
-            >{`  --header 'content-type: application/json' \\ `}</pre>
-            <pre css={{ margin: 0 }}>
-              {`  --url '`}
-              {endpoint}
-              {`' \\ `}
+            <pre css={{ margin: 0, whiteSpace: 'pre-line' }}>
+              {[
+                `curl --request POST \\`,
+                `  --header 'content-type: application/json' \\`,
+                `  --url '${endpoint}' \\`,
+                `  --data '${JSON.stringify({
+                  query: 'query { __typename }',
+                })}'`,
+              ].join('\n')}
             </pre>
-            <pre
-              css={{ margin: 0 }}
-            >{`  --data '{"query":"query { __typename }"}' `}</pre>
           </div>
         </div>
       </section>
