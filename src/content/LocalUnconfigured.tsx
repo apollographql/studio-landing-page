@@ -139,7 +139,18 @@ export default ({
             Automatically redirect to Studio next time
           </label>
         </div>
-        <CLIQueryInstructions endpoint={endpoint} />
+        <div
+          css={{
+            borderTop: '1px solid #7256D9',
+            marginTop: 40,
+            minWidth: 400,
+            color: '#D9CFFF',
+            fontSize: 15,
+          }}
+        >
+          <p>Or, query this graph directly:</p>
+          <CLIQueryInstructions endpoint={endpoint} />
+        </div>
       </section>
     </div>
 

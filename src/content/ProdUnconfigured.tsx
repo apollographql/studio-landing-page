@@ -25,7 +25,17 @@ export default ({ endpoint }: { endpoint: string }) => (
           flexDirection: 'column',
         }}
       >
-        <CLIQueryInstructions endpoint={endpoint} />
+        <div
+          css={{
+            marginTop: 20,
+            minWidth: 400,
+            color: '#D9CFFF',
+            fontSize: 15,
+          }}
+        >
+          <p>Send a POST request to query this endpoint</p>
+          <CLIQueryInstructions endpoint={endpoint} />
+        </div>
       </section>
     </div>
 
