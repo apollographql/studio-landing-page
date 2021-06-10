@@ -46,7 +46,7 @@ export default ({
               fontSize: 15,
             }}
           >
-            <p>Send a POST request to query this graph:</p>
+            <p>Send a POST request to query this endpoint:</p>
             <CLIQueryInstructions endpoint={endpoint} />
           </div>
           <p>
@@ -57,7 +57,7 @@ export default ({
               `}
               href={`${baseUrl}/graph/${graphRef}/explorer`}
             >
-              query this graph from Apollo Studio
+              query this endpoint from Apollo Studio
             </a>
           </p>
 
