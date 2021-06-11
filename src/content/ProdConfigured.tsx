@@ -41,55 +41,25 @@ export default ({
         >
           <div
             css={{
-              color: '#d9cfff',
+              minWidth: 400,
+              color: '#D9CFFF',
               fontSize: 15,
-              width: 500,
             }}
           >
-            <h1
-              css={{
-                fontSize: 24,
-                fontWeight: 'bold',
-                color: '#ffffff',
-                marginTop: 100,
-                marginBottom: 8,
-              }}
-            >
-              {`Welcome to the ${graphName} graph API.`}
-            </h1>
-            <p
-              css={{ lineHeight: '24px', maxWidth: '350px', margin: '0 auto' }}
-            >
-              Get a free private query console and schema-generated docs for
-              your graph in Apollo Studio.
-            </p>
+            <p>Send a POST request to query this endpoint:</p>
+            <CLIQueryInstructions endpoint={endpoint} />
           </div>
-          <a
-            css={{
-              fontWeight: 600,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              '&:hover': {
-                backgroundColor: '#3f20ba',
-                boxShadow:
-                  '0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)',
-                cursor: 'pointer',
-              },
-              padding: '13px 34px',
-              borderRadius: 4,
-              backgroundColor: '#7156d9',
-              color: '#ffffff',
-              boxShadow:
-                '0px 1px 4px rgba(18, 21, 26, 0.04), inset 0px -1px 0px rgba(18, 21, 26, 0.05), inset 0px 0px 0px 1px rgba(18, 21, 26, 0.2)',
-              fontSize: 19,
-              transition: 'background-color 0.2s ease-in-out',
-              marginTop: 28,
-              marginBottom: 24,
-            }}
-            href={`${baseUrl}/graph/${graphRef}/explorer`}
-          >
-            Query your server
-          </a>
+          <p>
+            You can also{' '}
+            <a
+              css={css`
+                color: #ffffff;
+              `}
+              href={`${baseUrl}/graph/${graphRef}/explorer`}
+            >
+              query this endpoint from Apollo Studio
+            </a>.
+          </p>
 
           <div style={{ fontSize: 13 }}>
             <input
@@ -139,19 +109,6 @@ export default ({
             >
               Automatically redirect to Studio next time
             </label>
-          </div>
-
-          <div
-            css={{
-              borderTop: '1px solid #7256D9',
-              marginTop: 40,
-              minWidth: 400,
-              color: '#D9CFFF',
-              fontSize: 15,
-            }}
-          >
-            <p>Or, query this graph directly:</p>
-            <CLIQueryInstructions endpoint={endpoint} />
           </div>
         </section>
       </div>
