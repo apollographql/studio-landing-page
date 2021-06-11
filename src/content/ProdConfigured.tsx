@@ -58,7 +58,7 @@ export default ({
               href={`${baseUrl}/graph/${graphRef}/explorer`}
             >
               query this endpoint from Apollo Studio
-            </a>
+            </a>.
           </p>
 
           <div style={{ fontSize: 13 }}>
