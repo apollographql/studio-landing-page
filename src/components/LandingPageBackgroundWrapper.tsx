@@ -2,9 +2,16 @@ import { css, Global } from '@emotion/react';
 import React from 'react';
 import BackgroundTexture from '../assets/background-texture.png';
 import GlowyPlanet from './GlowyPlanet';
+import InfoIcon from '../assets/info-icon.svg';
 /** @jsxImportSource @emotion/react */
 
-export default ({ children }: { children: React.ReactNode }) => (
+export default ({
+  children,
+  showFooter,
+}: {
+  children: React.ReactNode;
+  showFooter: boolean;
+}) => (
   <div
     css={{
       fontFamily: '"Source Sans Pro", sans-serif',
@@ -34,6 +41,48 @@ export default ({ children }: { children: React.ReactNode }) => (
     }}
   >
     {children}
+    {showFooter && (
+      <section
+        css={{
+          display: 'flex',
+          justifyContent: 'center',
+          color: '#d9cfff',
+          borderRadius: '8px',
+          padding: 10,
+          fontSize: 13,
+          margin: 10,
+          // make sure the text appears above the  semicircle
+          zIndex: 2,
+          maxWidth: 500,
+          marginTop: 100,
+          marginBottom: 45,
+        }}
+      >
+        <img
+          css={{
+            verticalAlign: 'middle',
+            marginRight: 6,
+          }}
+          src={InfoIcon}
+          alt="info-icon"
+        />{' '}
+        This page can be customized or hidden. Learn more in the
+        <a
+          css={{
+            marginLeft: '0.4em',
+            fontWeight: 600,
+            color: '#d9cfff',
+            cursor: 'pointer',
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+          }}
+          href="https://www.apollographql.com/docs/apollo-server/getting-started"
+        >
+          Apollo Server Docs
+        </a>
+      </section>
+    )}
     <GlowyPlanet />
   </div>
 );
