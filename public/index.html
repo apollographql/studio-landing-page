@@ -2,13 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/assets/favicon.png" />
+    <!-- Favicon -->
+
+    <script type="text/javascript" id="favicon-script">
+      var darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      var link = document.createElement('link');
+      var appleTouchLink = document.createElement('link');
+
+      link.rel = 'icon';
+      appleTouchLink.rel = 'apple-touch-icon';
+      link.id = 'favicon';
+      appleTouchLink.id = 'apple-touch-favicon';
+      link.type = 'image/png';
+      appleTouchLink.type = 'image/png';
+      const faviconHref = `%PUBLIC_URL%/assets/favicon${
+        darkMode ? '-dark' : ''
+      }.png`;
+      link.href = faviconHref;
+      appleTouchLink.href = faviconHref;
+
+      document.head.appendChild(link);
+      document.head.appendChild(appleTouchLink);
+    </script>
+    <!-- End Favicon -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Apollo server landing page" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/favicon.png" />
+    <meta name="description" content="Apollo Server landing page" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
