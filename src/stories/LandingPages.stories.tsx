@@ -24,34 +24,67 @@ export default {
             }
           `}
         />
-        <LandingPageBackgroundWrapper>{storyFn()}</LandingPageBackgroundWrapper>
+        {storyFn()}
       </>
     ),
   ],
 } as Meta;
 
 export const LocalUnconfigured = () => (
-  <LocalUnconfiguredComponent
-    baseUrl="https://studio.apollographql.com"
-    endpoint="https://localhost:4000"
-  />
+  <LandingPageBackgroundWrapper showFooter>
+    <LocalUnconfiguredComponent
+      baseUrl="https://studio.apollographql.com"
+      endpoint="https://localhost:4000"
+    />
+  </LandingPageBackgroundWrapper>
+);
+
+export const LocalUnconfiguredWithoutFooter = () => (
+  <LandingPageBackgroundWrapper showFooter={false}>
+    <LocalUnconfiguredComponent
+      baseUrl="https://studio.apollographql.com"
+      endpoint="https://localhost:4000"
+    />
+  </LandingPageBackgroundWrapper>
 );
 
 export const LocalUnconfiguredWithReallyLongEndpoint = () => (
-  <LocalUnconfiguredComponent
-    baseUrl="https://studio.apollographql.com"
-    endpoint="https://499d67ec-9864-4597-bbc1-8d21f55f88b3.35a76308-3181-4efd-a46a-2a5eb6e72ffb.com/api/graphql"
-  />
+  <LandingPageBackgroundWrapper showFooter>
+    <LocalUnconfiguredComponent
+      baseUrl="https://studio.apollographql.com"
+      endpoint="https://499d67ec-9864-4597-bbc1-8d21f55f88b3.35a76308-3181-4efd-a46a-2a5eb6e72ffb.com/api/graphql"
+    />
+  </LandingPageBackgroundWrapper>
 );
 
 export const ProdUnconfigured = () => (
-  <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
+  <LandingPageBackgroundWrapper showFooter>
+    <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
+  </LandingPageBackgroundWrapper>
+);
+
+export const ProdUnconfiguredWithoutFooter = () => (
+  <LandingPageBackgroundWrapper showFooter={false}>
+    <ProdUnconfiguredComponent endpoint="https://localhost:4000" />
+  </LandingPageBackgroundWrapper>
 );
 
 export const ProdConfigured = () => (
-  <ProdConfiguredComponent
-    baseUrl="https://studio.apollographql.com"
-    endpoint="https://localhost:4000"
-    graphRef="testGraph@staging"
-  />
+  <LandingPageBackgroundWrapper showFooter>
+    <ProdConfiguredComponent
+      baseUrl="https://studio.apollographql.com"
+      endpoint="https://localhost:4000"
+      graphRef="testGraph@staging"
+    />
+  </LandingPageBackgroundWrapper>
+);
+
+export const ProdConfiguredWithoutFooter = () => (
+  <LandingPageBackgroundWrapper showFooter={false}>
+    <ProdConfiguredComponent
+      baseUrl="https://studio.apollographql.com"
+      endpoint="https://localhost:4000"
+      graphRef="testGraph@staging"
+    />
+  </LandingPageBackgroundWrapper>
 );

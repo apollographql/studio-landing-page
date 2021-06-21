@@ -15,14 +15,17 @@ export default () => {
   const {
     graphRef,
     isProd,
+    footer,
     apolloStudioEnv,
   }: {
     graphRef: string | undefined;
     isProd: boolean;
+    footer: boolean;
     apolloStudioEnv: 'staging' | 'prod';
   } = {
     graphRef: undefined,
     isProd: false,
+    footer: true,
     apolloStudioEnv: 'prod',
     ...(window.landingPage &&
       JSON.parse(decodeURIComponent(window.landingPage))),
@@ -55,7 +58,7 @@ export default () => {
           }
         `}
       />
-      <LandingPageBackgroundWrapper>
+      <LandingPageBackgroundWrapper showFooter={footer}>
         {isProd && !!graphRef ? (
           <ProdConfigured
             baseUrl={baseUrl}
