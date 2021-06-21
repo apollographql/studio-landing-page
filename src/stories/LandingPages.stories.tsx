@@ -24,7 +24,7 @@ export default {
             }
           `}
         />
-        storyFn()
+        {storyFn()}
       </>
     ),
   ],
