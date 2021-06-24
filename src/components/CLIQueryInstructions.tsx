@@ -28,7 +28,7 @@ const CLIQueryInstructions = ({ endpoint }: { endpoint: string }) => (
       {[
         `curl --request POST \\`,
         `  --header 'content-type: application/json' \\`,
-        `  --url '${endpoint}' \\`,
+        `  --url '${escapeShellArgument(endpoint)}' \\`,
         `  --data '${JSON.stringify({
           query: 'query { __typename }',
         })}'`,
@@ -38,3 +38,14 @@ const CLIQueryInstructions = ({ endpoint }: { endpoint: string }) => (
 );
 
 export default CLIQueryInstructions;
+
+// Mostly from https://github.com/xxorax/node-shell-escape/blob/ebdb90e58050d74dbda9b8177f7de11cbb355d94/shell-escape.js#L4-L17
+function escapeShellArgument(argument: string) {
+  if (!/[^A-Za-z0-9_/:=-]/.test(argument)) {
+    return argument;
+  }
+  const escapedArgument = `'${argument.replace(/'/g, "'\\''")}'`;
+  return escapedArgument
+    .replace(/^(?:'')+/g, '') // unduplicate single-quote at the beginning
+    .replace(/\\'''/g, "\\'"); // remove non-escaped single-quote if there are enclosed between 2 escaped
+}
