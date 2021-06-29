@@ -1,3 +1,5 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-no-target-blank */
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
@@ -9,9 +11,11 @@ import CLIQueryInstructions from '../components/CLIQueryInstructions';
 export default ({
   endpoint,
   baseUrl,
+  isEmbedded,
 }: {
   endpoint: string;
   baseUrl: string;
+  isEmbedded: boolean;
 }) => (
   <div
     css={css`
@@ -85,6 +89,10 @@ export default ({
           marginTop: 28,
           marginBottom: 24,
         }}
+        // if the page is embedded, b/c folks are using Codesandbox to submit a bug report, for example
+        // we want to open Studio Sandbox in a new tab since Studio doesn't allow embedding
+        target={isEmbedded ? '_blank' : '_self'}
+        rel={isEmbedded ? 'noreferrer' : 'apollo-server'}
         href={`${baseUrl}/sandbox?endpoint=${encodeURIComponent(endpoint)}`}
       >
         Query your server

@@ -5,6 +5,7 @@ import LandingPageBackgroundWrapper from './components/LandingPageBackgroundWrap
 import LocalUnconfigured from './content/LocalUnconfigured';
 import ProdConfigured from './content/ProdConfigured';
 import ProdUnconfigured from './content/ProdUnconfigured';
+import isEmbedded from './isEmbedded';
 
 export const prodRedirectCookie =
   'apollo-server-landing-page-redirect-to-studio-prod';
@@ -46,6 +47,8 @@ export default () => {
     );
   }
 
+  const pageIsEmbedded = isEmbedded();
+
   return (
     <>
       <Global
@@ -64,11 +67,16 @@ export default () => {
             baseUrl={baseUrl}
             endpoint={endpoint}
             graphRef={graphRef}
+            isEmbedded={pageIsEmbedded}
           />
         ) : isProd ? (
           <ProdUnconfigured endpoint={endpoint} />
         ) : (
-          <LocalUnconfigured baseUrl={baseUrl} endpoint={endpoint} />
+          <LocalUnconfigured
+            baseUrl={baseUrl}
+            endpoint={endpoint}
+            isEmbedded={pageIsEmbedded}
+          />
         )}
       </LandingPageBackgroundWrapper>
     </>

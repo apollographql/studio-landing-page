@@ -35,6 +35,7 @@ export const LocalUnconfigured = () => (
     <LocalUnconfiguredComponent
       baseUrl="https://studio.apollographql.com"
       endpoint="https://localhost:4000"
+      isEmbedded
     />
   </LandingPageBackgroundWrapper>
 );
@@ -44,6 +45,7 @@ export const LocalUnconfiguredWithoutFooter = () => (
     <LocalUnconfiguredComponent
       baseUrl="https://studio.apollographql.com"
       endpoint="https://localhost:4000"
+      isEmbedded
     />
   </LandingPageBackgroundWrapper>
 );
@@ -53,6 +55,7 @@ export const LocalUnconfiguredWithReallyLongEndpoint = () => (
     <LocalUnconfiguredComponent
       baseUrl="https://studio.apollographql.com"
       endpoint="https://499d67ec-9864-4597-bbc1-8d21f55f88b3.35a76308-3181-4efd-a46a-2a5eb6e72ffb.com/api/graphql"
+      isEmbedded
     />
   </LandingPageBackgroundWrapper>
 );
@@ -75,6 +78,7 @@ export const ProdConfigured = () => (
       baseUrl="https://studio.apollographql.com"
       endpoint="https://localhost:4000"
       graphRef="testGraph@staging"
+      isEmbedded
     />
   </LandingPageBackgroundWrapper>
 );
@@ -85,6 +89,7 @@ export const ProdConfiguredWithoutFooter = () => (
       baseUrl="https://studio.apollographql.com"
       endpoint="https://localhost:4000"
       graphRef="testGraph@staging"
+      isEmbedded
     />
   </LandingPageBackgroundWrapper>
 );

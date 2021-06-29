@@ -1,3 +1,5 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/jsx-no-target-blank */
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
@@ -8,10 +10,12 @@ export default ({
   endpoint,
   graphRef,
   baseUrl,
+  isEmbedded,
 }: {
   endpoint: string;
   graphRef: string;
   baseUrl: string;
+  isEmbedded: boolean;
 }) => {
   const atIndex = graphRef.indexOf('@');
   const graphName = graphRef.substring(
@@ -53,7 +57,11 @@ export default ({
             css={css`
               color: #ffffff;
             `}
+            // if the page is embedded, b/c folks are using Codesandbox to submit a bug report, for example
+            // we want to open Studio Sandbox in a new tab since Studio doesn't allow embedding
+            target={isEmbedded ? '_blank' : '_self'}
             href={`${baseUrl}/graph/${graphRef}/explorer`}
+            rel={isEmbedded ? 'noreferrer' : 'apollo-server'}
           >
             query this endpoint from Apollo Studio
           </a>
