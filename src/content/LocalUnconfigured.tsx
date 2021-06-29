@@ -1,11 +1,9 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable react/jsx-no-target-blank */
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import React from 'react';
 import { localRedirectCookie } from '../App';
 import ApolloIcon from '../assets/ApolloIcon';
-import InfoIcon from '../assets/info-icon.svg';
 import CLIQueryInstructions from '../components/CLIQueryInstructions';
 
 export default ({
@@ -18,13 +16,13 @@ export default ({
   isEmbedded: boolean;
 }) => (
   <div
-    css={css`
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex-grow: 1;
-    `}
+    css={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexGrow: 1,
+    }}
   >
     <section
       css={{

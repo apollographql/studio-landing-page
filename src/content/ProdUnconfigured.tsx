@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import React from 'react';
 import CLIQueryInstructions from '../components/CLIQueryInstructions';
 
 export default ({ endpoint }: { endpoint: string }) => (
   <div
-    css={css`
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex-grow: 1;
-    `}
+    css={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexGrow: 1,
+    }}
   >
     <section
       css={{
