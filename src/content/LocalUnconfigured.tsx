@@ -89,8 +89,8 @@ export default ({
           marginTop: 28,
           marginBottom: 24,
         }}
-        // if the page is embedded, b/c folks are using code sandbox to submit a bug report, for example
-        // we want to open sandbox in a new tab since sandbox doesn't allow embedding
+        // if the page is embedded, b/c folks are using Codesandbox to submit a bug report, for example
+        // we want to open Studio Sandbox in a new tab since Studio doesn't allow embedding
         target={isEmbedded ? '_blank' : '_self'}
         rel={isEmbedded ? 'noreferrer' : 'apollo-server'}
         href={`${baseUrl}/sandbox?endpoint=${encodeURIComponent(endpoint)}`}
