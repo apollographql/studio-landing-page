@@ -40,7 +40,7 @@ export default () => {
 
   if (isProd && !!graphRef && getCookieValue(prodRedirectCookie) === 'true') {
     window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
-  } else if (getCookieValue(localRedirectCookie) === 'true') {
+  } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
     window.location.replace(
       `${baseUrl}/sandbox?endpoint=${encodeURIComponent(window.location.href)}`,
     );
