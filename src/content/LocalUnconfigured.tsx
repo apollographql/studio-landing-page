@@ -85,7 +85,9 @@ export default ({
           marginTop: 28,
           marginBottom: 24,
         }}
+        target={window.frameElement ? '_blank' : '_self'}
         href={`${baseUrl}/sandbox?endpoint=${encodeURIComponent(endpoint)}`}
+        rel="noreferrer"
       >
         Query your server
       </a>

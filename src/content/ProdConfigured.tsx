@@ -53,7 +53,9 @@ export default ({
             css={css`
               color: #ffffff;
             `}
+            target={window.frameElement ? '_blank' : '_self'}
             href={`${baseUrl}/graph/${graphRef}/explorer`}
+            rel="noreferrer"
           >
             query this endpoint from Apollo Studio
           </a>
