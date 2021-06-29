@@ -74,9 +74,9 @@ export default ({
             id="preference"
             onChange={(event) => {
               if (event.target.checked) {
-                document.cookie = `${prodRedirectCookie}=true`;
+                document.cookie = `${prodRedirectCookie(graphRef)}=true`;
               } else {
-                document.cookie = `${prodRedirectCookie}=false`;
+                document.cookie = `${prodRedirectCookie(graphRef)}=false`;
               }
             }}
             css={{

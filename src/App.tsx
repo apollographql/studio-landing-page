@@ -7,8 +7,10 @@ import ProdConfigured from './content/ProdConfigured';
 import ProdUnconfigured from './content/ProdUnconfigured';
 import isEmbedded from './isEmbedded';
 
-export const prodRedirectCookie =
-  'apollo-server-landing-page-redirect-to-studio-prod';
+export const prodRedirectCookie = (graphRef: string) =>
+  `apollo-server-landing-page-redirect-to-studio-prod-${encodeURIComponent(
+    graphRef,
+  )}`;
 export const localRedirectCookie =
   'apollo-server-landing-page-redirect-to-studio-local';
 
@@ -39,7 +41,11 @@ export default () => {
   const getCookieValue = (name: string) =>
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
 
-  if (isProd && !!graphRef && getCookieValue(prodRedirectCookie) === 'true') {
+  if (
+    isProd &&
+    !!graphRef &&
+    getCookieValue(prodRedirectCookie(graphRef)) === 'true'
+  ) {
     window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
   } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
     window.location.replace(
