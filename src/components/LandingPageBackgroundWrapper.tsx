@@ -77,7 +77,7 @@ export default ({
               textDecoration: 'underline',
             },
           }}
-          href="https://www.apollographql.com/docs/apollo-server/getting-started"
+          href="https://www.apollographql.com/docs/apollo-server/api/plugin/landing-pages/"
         >
           Apollo Server Docs
         </a>
