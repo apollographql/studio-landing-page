@@ -40,20 +40,25 @@ export default () => {
   // https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
   const getCookieValue = (name: string) =>
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
-
-  if (
-    isProd &&
-    !!graphRef &&
-    getCookieValue(prodRedirectCookie(graphRef)) === 'true'
-  ) {
-    window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
-  } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
-    window.location.replace(
-      `${baseUrl}/sandbox?endpoint=${encodeURIComponent(window.location.href)}`,
-    );
-  }
-
   const pageIsEmbedded = isEmbedded();
+
+  // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
+  // so we avoid redirecting to a page that won't load.
+  if (!pageIsEmbedded) {
+    if (
+      isProd &&
+      !!graphRef &&
+      getCookieValue(prodRedirectCookie(graphRef)) === 'true'
+    ) {
+      window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
+    } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
+      window.location.replace(
+        `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
+          window.location.href,
+        )}`,
+      );
+    }
+  }
 
   return (
     <>

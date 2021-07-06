@@ -82,31 +82,33 @@ export default ({
             },
           }}
         />
-        <label
-          css={{
-            cursor: 'pointer',
-            paddingLeft: 24,
-            position: 'relative',
-            color: '#d9cfff',
-            lineHeight: '24px',
-            // this is a hack for showing our own styled check box
-            // https://css-tricks.com/the-checkbox-hack/#custom-designed-radio-buttons-and-checkboxes
-            '&:before': {
-              content: `${'" "'}`,
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              width: 14,
-              height: 14,
-              border: '1px solid #ad9bf6',
-              borderRadius: 4,
-            },
-          }}
-          className="preference-label"
-          htmlFor="preference"
-        >
-          Automatically redirect to Studio next time
-        </label>
+        {!isEmbedded && (
+          <label
+            css={{
+              cursor: 'pointer',
+              paddingLeft: 24,
+              position: 'relative',
+              color: '#d9cfff',
+              lineHeight: '24px',
+              // this is a hack for showing our own styled check box
+              // https://css-tricks.com/the-checkbox-hack/#custom-designed-radio-buttons-and-checkboxes
+              '&:before': {
+                content: `${'" "'}`,
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: 14,
+                height: 14,
+                border: '1px solid #ad9bf6',
+                borderRadius: 4,
+              },
+            }}
+            className="preference-label"
+            htmlFor="preference"
+          >
+            Automatically redirect to Studio next time
+          </label>
+        )}
       </div>
     </section>
   </div>
