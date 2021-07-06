@@ -42,7 +42,8 @@ export default () => {
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
   const pageIsEmbedded = isEmbedded();
 
-  // perform the redirect
+  // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
+  // so we avoid redirecting to a page that won't load.
   if (!pageIsEmbedded) {
     if (
       isProd &&
