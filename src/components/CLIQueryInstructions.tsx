@@ -13,6 +13,8 @@ const CLIQueryInstructions = ({ endpoint }: { endpoint: string }) => (
       line-height: 18px;
       text-align: left;
       position: relative;
+      margin-right: 20px;
+      margin-left: 20px;
 
       &:before {
         content: '$';
@@ -24,7 +26,7 @@ const CLIQueryInstructions = ({ endpoint }: { endpoint: string }) => (
       }
     `}
   >
-    <pre css={{ margin: 0, whiteSpace: 'pre' }}>
+    <pre css={{ margin: 0, whiteSpace: 'pre-wrap' }}>
       {[
         `curl --request POST \\`,
         `  --header 'content-type: application/json' \\`,
