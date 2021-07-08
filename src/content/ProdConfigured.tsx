@@ -23,6 +23,7 @@ export default ({
       justifyContent: 'center',
       alignItems: 'center',
       flexGrow: 1,
+      width: '100%',
     }}
   >
     <section
@@ -32,6 +33,9 @@ export default ({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
+        width: '100%',
+        marginRight: 20,
+        marginLeft: 20,
       }}
     >
       <div

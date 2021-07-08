@@ -30,7 +30,7 @@ export default ({
       color: 'white',
       textAlign: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      overflow: 'auto',
       height: '100%',
       width: '100%',
       // the stars in the background
