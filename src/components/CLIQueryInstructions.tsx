@@ -30,7 +30,7 @@ const CLIQueryInstructions = ({ endpoint }: { endpoint: string }) => (
       {[
         `curl --request POST \\`,
         `  --header 'content-type: application/json' \\`,
-        `  --url '${escapeShellArgument(endpoint)}' \\`,
+        `  --url ${escapeShellArgument(endpoint)} \\`,
         `  --data '${JSON.stringify({
           query: 'query { __typename }',
         })}'`,
