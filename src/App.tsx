@@ -20,11 +20,17 @@ export default () => {
     isProd,
     footer,
     apolloStudioEnv,
+    document: encodedDocument,
+    variables: encodedVariables,
+    headers: encodedHeaders,
   }: {
     graphRef: string | undefined;
     isProd: boolean;
     footer: boolean;
     apolloStudioEnv: 'staging' | 'prod';
+    document: string;
+    variables: string;
+    headers: string;
   } = {
     graphRef: undefined,
     isProd: false,
@@ -33,6 +39,13 @@ export default () => {
     ...(window.landingPage &&
       JSON.parse(decodeURIComponent(window.landingPage))),
   };
+
+  const queryParams = {
+    document: encodedDocument,
+    variables: encodedVariables,
+    headers: encodedHeaders,
+  };
+
   const endpoint = window.location.href;
   const baseUrl = `https://studio${
     apolloStudioEnv === 'staging' ? '-staging' : ''
@@ -42,6 +55,23 @@ export default () => {
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
   const pageIsEmbedded = isEmbedded();
 
+  const getAdditionalQueryParams = (hasInitialQueryParams: boolean) =>
+    Object.entries(queryParams).reduce((allParams, [key, value]) => {
+      if (value) {
+        const queryParamString =
+          allParams.length === 0 && !hasInitialQueryParams
+            ? `?${key}=${value}`
+            : `&${key}=${value}`;
+        allParams.push(queryParamString);
+      }
+      return allParams;
+    }, [] as Array<string>);
+
+  const studioLink = isProd
+    ? `${baseUrl}/graph/${graphRef}/explorer${getAdditionalQueryParams(false)}`
+    : `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
+        window.location.href,
+      )}${getAdditionalQueryParams(true)}`;
   // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
   // so we avoid redirecting to a page that won't load.
   if (!pageIsEmbedded) {
@@ -50,13 +80,9 @@ export default () => {
       !!graphRef &&
       getCookieValue(prodRedirectCookie(graphRef)) === 'true'
     ) {
-      window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
+      window.location.replace(studioLink);
     } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
-      window.location.replace(
-        `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
-          window.location.href,
-        )}`,
-      );
+      window.location.replace(studioLink);
     }
   }
 
@@ -75,7 +101,7 @@ export default () => {
       <LandingPageBackgroundWrapper showFooter={footer}>
         {isProd && !!graphRef ? (
           <ProdConfigured
-            baseUrl={baseUrl}
+            studioLink={studioLink}
             endpoint={endpoint}
             graphRef={graphRef}
             isEmbedded={pageIsEmbedded}
@@ -84,7 +110,7 @@ export default () => {
           <ProdUnconfigured endpoint={endpoint} />
         ) : (
           <LocalUnconfigured
-            baseUrl={baseUrl}
+            studioLink={studioLink}
             endpoint={endpoint}
             isEmbedded={pageIsEmbedded}
           />

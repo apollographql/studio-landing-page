@@ -8,13 +8,13 @@ import CLIQueryInstructions from '../components/CLIQueryInstructions';
 export default ({
   endpoint,
   graphRef,
-  baseUrl,
   isEmbedded,
+  studioLink,
 }: {
   endpoint: string;
   graphRef: string;
-  baseUrl: string;
   isEmbedded: boolean;
+  studioLink: string;
 }) => (
   <div
     css={{
@@ -55,7 +55,7 @@ export default ({
           // if the page is embedded, b/c folks are using Codesandbox to submit a bug report, for example
           // we want to open Studio Sandbox in a new tab since Studio doesn't allow embedding
           target={isEmbedded ? '_blank' : '_self'}
-          href={`${baseUrl}/graph/${graphRef}/explorer`}
+          href={studioLink}
           rel={isEmbedded ? 'noreferrer' : 'apollo-server'}
         >
           query this endpoint from Apollo Studio
