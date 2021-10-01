@@ -33,7 +33,7 @@ export default {
 export const LocalUnconfigured = () => (
   <LandingPageBackgroundWrapper showFooter>
     <LocalUnconfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/sandbox?endpoint=http%3A%2F%2Flocalhost%3A3001%2F"
       endpoint="https://localhost:4000"
       isEmbedded={false}
     />
@@ -43,7 +43,7 @@ export const LocalUnconfigured = () => (
 export const LocalUnconfiguredEmbedded = () => (
   <LandingPageBackgroundWrapper showFooter>
     <LocalUnconfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/sandbox?endpoint=http%3A%2F%2Flocalhost%3A3001%2F"
       endpoint="https://localhost:4000"
       isEmbedded
     />
@@ -53,7 +53,7 @@ export const LocalUnconfiguredEmbedded = () => (
 export const LocalUnconfiguredWithoutFooter = () => (
   <LandingPageBackgroundWrapper showFooter={false}>
     <LocalUnconfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/sandbox?endpoint=http%3A%2F%2Flocalhost%3A3001%2F"
       endpoint="https://localhost:4000"
       isEmbedded={false}
     />
@@ -63,7 +63,7 @@ export const LocalUnconfiguredWithoutFooter = () => (
 export const LocalUnconfiguredWithReallyLongEndpoint = () => (
   <LandingPageBackgroundWrapper showFooter>
     <LocalUnconfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/sandbox?endpoint=http%3A%2F%2Flocalhost%3A3001%2F"
       endpoint="https://499d67ec-9864-4597-bbc1-8d21f55f88b3.35a76308-3181-4efd-a46a-2a5eb6e72ffb.com/api/graphql"
       isEmbedded={false}
     />
@@ -85,7 +85,7 @@ export const ProdUnconfiguredWithoutFooter = () => (
 export const ProdConfigured = () => (
   <LandingPageBackgroundWrapper showFooter>
     <ProdConfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/graph/acephei/explorer?variant=current"
       endpoint="https://localhost:4000"
       graphRef="testGraph@staging"
       isEmbedded={false}
@@ -96,7 +96,7 @@ export const ProdConfigured = () => (
 export const ProdConfiguredEmbedded = () => (
   <LandingPageBackgroundWrapper showFooter>
     <ProdConfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/graph/acephei/explorer?variant=current"
       endpoint="https://localhost:4000"
       graphRef="testGraph@staging"
       isEmbedded
@@ -107,7 +107,7 @@ export const ProdConfiguredEmbedded = () => (
 export const ProdConfiguredWithoutFooter = () => (
   <LandingPageBackgroundWrapper showFooter={false}>
     <ProdConfiguredComponent
-      studioLink="https://studio.apollographql.com"
+      studioLink="https://studio.apollographql.com/graph/acephei/explorer?variant=current"
       endpoint="https://localhost:4000"
       graphRef="testGraph@staging"
       isEmbedded={false}
