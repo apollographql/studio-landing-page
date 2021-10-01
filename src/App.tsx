@@ -20,11 +20,17 @@ export default () => {
     isProd,
     footer,
     apolloStudioEnv,
+    document: defaultDocument,
+    variables: defaultVariables,
+    headers: defaultHeaders,
   }: {
     graphRef: string | undefined;
     isProd: boolean;
     footer: boolean;
     apolloStudioEnv: 'staging' | 'prod';
+    document?: string;
+    variables?: Record<string, string>;
+    headers?: Record<string, string>;
   } = {
     graphRef: undefined,
     isProd: false,
@@ -33,6 +39,7 @@ export default () => {
     ...(window.landingPage &&
       JSON.parse(decodeURIComponent(window.landingPage))),
   };
+
   const endpoint = window.location.href;
   const baseUrl = `https://studio${
     apolloStudioEnv === 'staging' ? '-staging' : ''
@@ -42,22 +49,42 @@ export default () => {
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
   const pageIsEmbedded = isEmbedded();
 
+  const getQueryParamString = () => {
+    const queryParams: {
+      document?: string;
+      variables?: string;
+      headers?: string;
+      endpoint?: string;
+    } = {
+      document: defaultDocument,
+      variables: JSON.stringify(defaultVariables),
+      headers: JSON.stringify(defaultHeaders),
+      endpoint: isProd ? undefined : window.location.href,
+    };
+    let queryParamString = '';
+    Object.entries(queryParams).forEach(([key, value]) => {
+      if (value) {
+        queryParamString += `&${key}=${encodeURIComponent(value)}`;
+      }
+    });
+    return queryParamString.length ? `?${queryParamString.slice(1)}` : '';
+  };
+
+  const studioLink =
+    isProd && !!graphRef
+      ? `${baseUrl}/graph/${graphRef}/explorer${getQueryParamString()}`
+      : `${baseUrl}/sandbox${getQueryParamString()}`;
+
   // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
   // so we avoid redirecting to a page that won't load.
-  if (!pageIsEmbedded) {
-    if (
+  if (
+    !pageIsEmbedded &&
+    ((!!graphRef &&
       isProd &&
-      !!graphRef &&
-      getCookieValue(prodRedirectCookie(graphRef)) === 'true'
-    ) {
-      window.location.replace(`${baseUrl}/graph/${graphRef}/explorer`);
-    } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
-      window.location.replace(
-        `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
-          window.location.href,
-        )}`,
-      );
-    }
+      getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
+      (!isProd && getCookieValue(localRedirectCookie) === 'true'))
+  ) {
+    window.location.replace(studioLink);
   }
 
   return (
@@ -75,7 +102,7 @@ export default () => {
       <LandingPageBackgroundWrapper showFooter={footer}>
         {isProd && !!graphRef ? (
           <ProdConfigured
-            baseUrl={baseUrl}
+            studioLink={studioLink}
             endpoint={endpoint}
             graphRef={graphRef}
             isEmbedded={pageIsEmbedded}
@@ -84,7 +111,7 @@ export default () => {
           <ProdUnconfigured endpoint={endpoint} />
         ) : (
           <LocalUnconfigured
-            baseUrl={baseUrl}
+            studioLink={studioLink}
             endpoint={endpoint}
             isEmbedded={pageIsEmbedded}
           />
