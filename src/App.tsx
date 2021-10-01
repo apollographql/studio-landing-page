@@ -28,9 +28,9 @@ export default () => {
     isProd: boolean;
     footer: boolean;
     apolloStudioEnv: 'staging' | 'prod';
-    document: string;
-    variables: Record<string, string>;
-    headers: Record<string, string>;
+    document?: string;
+    variables?: Record<string, string>;
+    headers?: Record<string, string>;
   } = {
     graphRef: undefined,
     isProd: false,
@@ -51,9 +51,9 @@ export default () => {
 
   const getQueryParamString = () => {
     const queryParams: {
-      document: string;
-      variables: string;
-      headers: string;
+      document?: string;
+      variables?: string;
+      headers?: string;
       endpoint?: string;
     } = {
       document: defaultDocument,
