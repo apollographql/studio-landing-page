@@ -20,17 +20,17 @@ export default () => {
     isProd,
     footer,
     apolloStudioEnv,
-    document: encodedDocument,
-    variables: encodedVariables,
-    headers: encodedHeaders,
+    document: defaultDocument,
+    variables: defaultVariables,
+    headers: defaultHeaders,
   }: {
     graphRef: string | undefined;
     isProd: boolean;
     footer: boolean;
     apolloStudioEnv: 'staging' | 'prod';
     document: string;
-    variables: string;
-    headers: string;
+    variables: Record<string, string>;
+    headers: Record<string, string>;
   } = {
     graphRef: undefined,
     isProd: false,
@@ -38,12 +38,6 @@ export default () => {
     apolloStudioEnv: 'prod',
     ...(window.landingPage &&
       JSON.parse(decodeURIComponent(window.landingPage))),
-  };
-
-  const queryParams = {
-    document: encodedDocument,
-    variables: encodedVariables,
-    headers: encodedHeaders,
   };
 
   const endpoint = window.location.href;
@@ -55,35 +49,40 @@ export default () => {
     document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || '';
   const pageIsEmbedded = isEmbedded();
 
-  const getAdditionalQueryParams = (hasInitialQueryParams: boolean) =>
-    Object.entries(queryParams).reduce((allParams, [key, value]) => {
+  const getQueryParamString = () => {
+    const queryParams: {
+      document: string;
+      variables: string;
+      headers: string;
+      endpoint?: string;
+    } = {
+      document: defaultDocument,
+      variables: JSON.stringify(defaultVariables),
+      headers: JSON.stringify(defaultHeaders),
+      endpoint: isProd ? undefined : window.location.href,
+    };
+    let queryParamString = '';
+    Object.entries(queryParams).forEach(([key, value]) => {
       if (value) {
-        const queryParamString =
-          allParams.length === 0 && !hasInitialQueryParams
-            ? `?${key}=${value}`
-            : `&${key}=${value}`;
-        allParams.push(queryParamString);
+        queryParamString += `&${key}=${encodeURIComponent(value)}`;
       }
-      return allParams;
-    }, [] as Array<string>);
+    });
+    return `?${queryParamString.slice(1)}`;
+  };
 
   const studioLink = isProd
-    ? `${baseUrl}/graph/${graphRef}/explorer${getAdditionalQueryParams(false)}`
-    : `${baseUrl}/sandbox?endpoint=${encodeURIComponent(
-        window.location.href,
-      )}${getAdditionalQueryParams(true)}`;
+    ? `${baseUrl}/graph/${graphRef}/explorer${getQueryParamString()}`
+    : `${baseUrl}/sandbox${getQueryParamString()}`;
+
   // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
   // so we avoid redirecting to a page that won't load.
-  if (!pageIsEmbedded) {
-    if (
-      isProd &&
-      !!graphRef &&
-      getCookieValue(prodRedirectCookie(graphRef)) === 'true'
-    ) {
-      window.location.replace(studioLink);
-    } else if (!isProd && getCookieValue(localRedirectCookie) === 'true') {
-      window.location.replace(studioLink);
-    }
+  if (
+    (!pageIsEmbedded &&
+      graphRef &&
+      getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
+    getCookieValue(localRedirectCookie) === 'true'
+  ) {
+    window.location.replace(studioLink);
   }
 
   return (
