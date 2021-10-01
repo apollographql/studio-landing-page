@@ -70,15 +70,18 @@ export default () => {
     return queryParamString.length ? `?${queryParamString.slice(1)}` : '';
   };
 
-  const studioLink = isProd
-    ? `${baseUrl}/graph/${graphRef}/explorer${getQueryParamString()}`
-    : `${baseUrl}/sandbox${getQueryParamString()}`;
+  const studioLink =
+    isProd && !!graphRef
+      ? `${baseUrl}/graph/${graphRef}/explorer${getQueryParamString()}`
+      : `${baseUrl}/sandbox${getQueryParamString()}`;
 
   // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
   // so we avoid redirecting to a page that won't load.
   if (
     !pageIsEmbedded &&
-    ((graphRef && getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
+    ((!!graphRef &&
+      isProd &&
+      getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
       getCookieValue(localRedirectCookie) === 'true')
   ) {
     window.location.replace(studioLink);
