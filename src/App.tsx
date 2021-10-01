@@ -67,7 +67,7 @@ export default () => {
         queryParamString += `&${key}=${encodeURIComponent(value)}`;
       }
     });
-    return `?${queryParamString.slice(1)}`;
+    return queryParamString.length ? `?${queryParamString.slice(1)}` : '';
   };
 
   const studioLink = isProd
