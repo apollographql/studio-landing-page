@@ -82,7 +82,7 @@ export default () => {
     ((!!graphRef &&
       isProd &&
       getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
-      getCookieValue(localRedirectCookie) === 'true')
+      (!isProd && getCookieValue(localRedirectCookie) === 'true'))
   ) {
     window.location.replace(studioLink);
   }
