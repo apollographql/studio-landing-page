@@ -77,10 +77,9 @@ export default () => {
   // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
   // so we avoid redirecting to a page that won't load.
   if (
-    (!pageIsEmbedded &&
-      graphRef &&
-      getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
-    getCookieValue(localRedirectCookie) === 'true'
+    !pageIsEmbedded &&
+    ((graphRef && getCookieValue(prodRedirectCookie(graphRef)) === 'true') ||
+      getCookieValue(localRedirectCookie) === 'true')
   ) {
     window.location.replace(studioLink);
   }
