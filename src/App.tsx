@@ -63,7 +63,7 @@ export default () => {
       variables: JSON.stringify(defaultVariables),
       headers: JSON.stringify(defaultHeaders),
       endpoint: isProd ? undefined : window.location.href,
-      includeCookies: defaultIncludeCookies,
+      includeCookies: defaultIncludeCookies ? 'include' : undefined,
     };
     let queryParamString = '';
     Object.entries(queryParams).forEach(([key, value]) => {
