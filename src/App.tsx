@@ -32,7 +32,7 @@ export default () => {
     document?: string;
     variables?: Record<string, string>;
     headers?: Record<string, string>;
-    includeCookies?: string;
+    includeCookies?: boolean;
   } = {
     graphRef: undefined,
     isProd: false,
