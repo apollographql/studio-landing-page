@@ -32,7 +32,7 @@ export default () => {
     document?: string;
     variables?: Record<string, string>;
     headers?: Record<string, string>;
-    includeCookies?: string;
+    includeCookies?: boolean;
   } = {
     graphRef: undefined,
     isProd: false,
@@ -63,7 +63,7 @@ export default () => {
       variables: JSON.stringify(defaultVariables),
       headers: JSON.stringify(defaultHeaders),
       endpoint: isProd ? undefined : window.location.href,
-      includeCookies: defaultIncludeCookies,
+      includeCookies: defaultIncludeCookies ? 'include' : undefined,
     };
     let queryParamString = '';
     Object.entries(queryParams).forEach(([key, value]) => {
