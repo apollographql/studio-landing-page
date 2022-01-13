@@ -72,7 +72,7 @@ export const LocalUnconfiguredWithReallyLongEndpoint = () => (
 export const LocalUnconfiguredWithIncludeCookies = () => (
   <LandingPageBackgroundWrapper showFooter>
     <LocalUnconfiguredComponent
-      studioLink="https://studio.apollographql.com/sandbox?endpoint=http%3A%2F%2Flocalhost%3A3001%2F?includeCookies=include"
+      studioLink="https://studio.apollographql.com/sandbox?endpoint=http%3A%2F%2Flocalhost%3A3001%2F?includeCookies=true"
       endpoint="https://499d67ec-9864-4597-bbc1-8d21f55f88b3.35a76308-3181-4efd-a46a-2a5eb6e72ffb.com/api/graphql"
       isEmbedded={false}
     />
