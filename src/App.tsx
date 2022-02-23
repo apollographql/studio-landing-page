@@ -20,10 +20,10 @@ export default () => {
     isProd,
     footer,
     apolloStudioEnv,
-    document: defaultDocument,
-    variables: defaultVariables,
-    headers: defaultHeaders,
-    includeCookies: defaultIncludeCookies,
+    document: passedDocument,
+    variables: passedVariables,
+    headers: passedHeaders,
+    includeCookies: passedIncludeCookies,
   }: {
     graphRef: string | undefined;
     isProd: boolean;
@@ -59,11 +59,11 @@ export default () => {
       endpoint?: string;
       includeCookies?: string;
     } = {
-      document: defaultDocument,
-      variables: JSON.stringify(defaultVariables),
-      headers: JSON.stringify(defaultHeaders),
+      document: passedDocument,
+      variables: JSON.stringify(passedVariables),
+      headers: JSON.stringify(passedHeaders),
       endpoint: isProd ? undefined : window.location.href,
-      includeCookies: defaultIncludeCookies ? 'true' : undefined,
+      includeCookies: passedIncludeCookies ? 'true' : undefined,
     };
     let queryParamString = '';
     Object.entries(queryParams).forEach(([key, value]) => {
