@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react';
 import React from 'react';
-import LandingPageBackgroundWrapper from './components/LandingPageBackgroundWrapper';
-import LocalUnconfigured from './content/LocalUnconfigured';
-import ProdConfigured from './content/ProdConfigured';
-import ProdUnconfigured from './content/ProdUnconfigured';
-import isEmbedded from './isEmbedded';
+import LandingPageBackgroundWrapper from '../components/LandingPageBackgroundWrapper';
+import LocalUnconfigured from '../content/LocalUnconfigured';
+import ProdConfigured from '../content/ProdConfigured';
+import ProdUnconfigured from '../content/ProdUnconfigured';
+import isEmbedded from '../isEmbedded';
+import { StudioLandingPageConfig } from '../LandingPageConfig';
 
 export const prodRedirectCookie = (graphRef: string) =>
   `apollo-server-landing-page-redirect-to-studio-prod-${encodeURIComponent(
@@ -14,7 +15,7 @@ export const prodRedirectCookie = (graphRef: string) =>
 export const localRedirectCookie =
   'apollo-server-landing-page-redirect-to-studio-local';
 
-export default () => {
+export default ({ config }: { config: StudioLandingPageConfig }) => {
   const {
     graphRef,
     isProd,
@@ -23,7 +24,7 @@ export default () => {
     document: defaultDocument,
     variables: defaultVariables,
     headers: defaultHeaders,
-    includeCookies: defaultIncludeCookies,
+    includeCookies,
   }: {
     graphRef: string | undefined;
     isProd: boolean;
@@ -38,8 +39,7 @@ export default () => {
     isProd: false,
     footer: true,
     apolloStudioEnv: 'prod',
-    ...(window.landingPage &&
-      JSON.parse(decodeURIComponent(window.landingPage))),
+    ...config,
   };
 
   const endpoint = window.location.href;
@@ -63,7 +63,7 @@ export default () => {
       variables: JSON.stringify(defaultVariables),
       headers: JSON.stringify(defaultHeaders),
       endpoint: isProd ? undefined : window.location.href,
-      includeCookies: defaultIncludeCookies ? 'true' : undefined,
+      includeCookies: includeCookies ? 'true' : undefined,
     };
     let queryParamString = '';
     Object.entries(queryParams).forEach(([key, value]) => {
