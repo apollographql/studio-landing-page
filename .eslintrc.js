@@ -21,9 +21,11 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'no-use-before-define': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
     'no-unused-vars': 'off',
     'no-nested-ternary': 'off',
     'no-undef': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'consistent-return': 'off',
   },
 };
