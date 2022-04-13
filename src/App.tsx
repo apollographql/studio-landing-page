@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import EmbeddedExplorer from './embeddedExplorer/EmbeddedExplorer';
+import React, { Suspense, useMemo } from 'react';
 import LandingPage from './landingPage/LandingPage';
 import { LandingPageConfig } from './LandingPageConfig';
 
@@ -25,6 +24,15 @@ import { LandingPageConfig } from './LandingPageConfig';
 //   }),
 // );
 
+const EmbeddedExplorer = React.lazy(
+  async () =>
+    ({
+      default: await import(
+        /* webpackChunkName: "EmbeddedExplorer" */ './embeddedExplorer/EmbeddedExplorer'
+      ),
+    }.default),
+);
+
 export default () => {
   const config: LandingPageConfig = useMemo(
     () => ({
@@ -37,7 +45,15 @@ export default () => {
 
   return config.shouldEmbed ? (
     config.graphRef && config.isProd ? (
-      <EmbeddedExplorer config={config} />
+      <Suspense
+        fallback={
+          <div style={{ width: '100%', height: '100%', margin: 'auto' }}>
+            Loading...
+          </div>
+        }
+      >
+        <EmbeddedExplorer config={config} />
+      </Suspense>
     ) : (
       // TODO use embedded sandbox when this is not prod / no graphRef
       // <EmbeddedSandbox />
