@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { localRedirectCookie } from '../LandingPage';
+import { localRedirectCookie } from '../landingPage/LandingPage';
 import ApolloIcon from '../assets/ApolloIcon';
 import CLIQueryInstructions from '../components/CLIQueryInstructions';
 

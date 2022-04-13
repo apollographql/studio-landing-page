@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { prodRedirectCookie } from '../LandingPage';
+import { prodRedirectCookie } from '../landingPage/LandingPage';
 import CLIQueryInstructions from '../components/CLIQueryInstructions';
 
 export default ({
