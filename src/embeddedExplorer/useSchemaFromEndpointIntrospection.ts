@@ -1,6 +1,21 @@
 import type { IntrospectionQuery } from 'graphql';
 import { useCallback, useEffect, useState } from 'react';
 import { schemaLoader, SchemaResponse } from './schemaLoader';
+// This needs to be kept up with
+// https://github.com/mdg-private/studio-ui/blob/main/src/app/graph/explorerPage/hooks/useExplorerState/useSchema/useSchemaFromEndpointIntrospection/useSchemaFromEndpointIntrospection.ts#L26-L38
+export type IntrospectionFailure =
+  // No endpoint has been set
+  | 'noEndpointProvided'
+  // Endpoint is unreachable
+  | 'unableToReachEndpoint'
+  // Endpoint is reachable but introspection response was not a valid graphql
+  // response
+  | 'invalidIntrospectionResponse'
+  // Endpoint is reachable but introspection is disabled
+  | 'introspectionDisabled'
+  // Endpoint is reachable but schema returned from introspection request is
+  // invalid
+  | 'invalidIntrospectionSchema';
 
 export const useSchemaFromEndpointIntrospection = ({
   endpoint,
@@ -18,7 +33,7 @@ export const useSchemaFromEndpointIntrospection = ({
   pollInterval: number;
 }) => {
   const [schema, setSchema] = useState<IntrospectionQuery>();
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<IntrospectionFailure>();
 
   const refreshSchema = useCallback(async () => {
     const schemaResponse = await schemaLoader({
@@ -32,15 +47,13 @@ export const useSchemaFromEndpointIntrospection = ({
       },
     });
     if (!schemaResponse) {
-      setError(
-        'We were not able to introspect your schema because we were not able to reach your endpoint.',
-      );
+      setError('unableToReachEndpoint');
     }
     if (!schemaResponse.data) {
       setError(
         schemaResponse.errors
-          ? 'Introspection is disabled on your endpoint. To use the embedded Explorer, we need to introspect your schema.'
-          : 'Something went wrong trying to introspect your schema.',
+          ? 'introspectionDisabled'
+          : 'invalidIntrospectionResponse',
       );
     }
     setSchema(schemaResponse.data);
