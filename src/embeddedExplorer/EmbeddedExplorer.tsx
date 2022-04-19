@@ -15,6 +15,7 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
     persistExplorerState,
     includeCookies,
     schemaPollIntervalMs,
+    schema: schemaFromApolloServer,
   } = config;
 
   const endpoint = window.location.href;
@@ -23,14 +24,34 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
   // TODO(maya): when you have exposed a way to set error on the
   // ApolloExplorerReact component & the EmbeddedExplorer class,
   // pass this error through to be shown on the AS embed page the same way
-  const { schema, error } = useSchemaFromEndpointIntrospection({
+  const {
+    schema: schemaFromIntrospection,
+    error,
+  } = useSchemaFromEndpointIntrospection({
     endpoint,
     stableHeaders,
     includeCookies: !!includeCookies,
     pollInterval: schemaPollIntervalMs ?? 5000,
-    skip: !!graphRef,
+    /**
+     * We have two options for grabbing your schema for the embedded Explorer.
+     * If you have a Studio graph, you can specify that graphRef,
+     * and we will render the Explorer of your private graph using that registered schema.
+     *
+     * You also have the option to just use the schema running on this Apollo Server
+     * instance.
+     *
+     * Apollo Server should send us everyone's schema who doesn't specify a graphRef,
+     * but we can continue to poll for changes on gateways only.
+     * If you are not running a gateway, and you haven't specified
+     * the schemaPollIntervalMs, we don't introspect your graph.
+     * If you are running a gateway, the schemaPollIntervalMs
+     * defaults to 5000 & we will introspect your graph.
+     */ skip:
+      !!graphRef || (schemaPollIntervalMs === 0 && !!schemaFromApolloServer),
     skipPolling: schemaPollIntervalMs === 0,
   });
+
+  const schema = schemaFromIntrospection ?? schemaFromApolloServer;
 
   return (
     <>
