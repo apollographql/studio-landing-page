@@ -1,9 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react';
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { ApolloExplorerReact } from '@apollo/explorer';
 import { useSchemaFromEndpointIntrospection } from './useSchemaFromEndpointIntrospection';
 import { EmbeddedLandingPageConfig } from '../LandingPageConfig';
+
+export const INTROSPECTION_QUERY_WITH_HEADERS = 'IntrospectionQueryWithHeaders';
+
+type IncomingMessageEvent =
+  | MessageEvent
+  | MessageEvent<{
+      name: 'IntrospectionQueryWithHeaders';
+      introspectionRequestBody: string;
+      introspectionRequestHeaders: Record<string, string>;
+    }>;
 
 export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
   const {
@@ -18,8 +28,40 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
     schema: schemaFromApolloServer,
   } = config;
 
+  const [
+    introspectionRequestBody,
+    setIntrospectionRequestBody,
+  ] = useState<string>();
+  const [
+    introspectionRequestHeaders,
+    setIntrospectionRequestHeaders,
+  ] = useState<Record<string, string>>();
+
   const endpoint = window.location.href;
-  const stableHeaders = useMemo(() => defaultHeaders ?? {}, [defaultHeaders]);
+  const stableHeaders = useMemo(
+    () => introspectionRequestHeaders ?? defaultHeaders ?? {},
+    [defaultHeaders, introspectionRequestHeaders],
+  );
+
+  // The headers / env vars may change as the user edits them in the embed
+  // the embed sends us the new headers w env vars & introspection body when that happens
+  useEffect(() => {
+    const handleReceiveIntrospectionQuery = (event: IncomingMessageEvent) => {
+      if (
+        'name' in event.data &&
+        'introspectionRequestBody' in event.data &&
+        'introspectionRequestHeaders' in event.data
+      ) {
+        setIntrospectionRequestBody(event.data.introspectionRequestBody);
+        setIntrospectionRequestHeaders(event.data.introspectionRequestHeaders);
+      }
+    };
+    window.addEventListener('message', handleReceiveIntrospectionQuery);
+
+    return () => {
+      window.removeEventListener('message', handleReceiveIntrospectionQuery);
+    };
+  }, [setIntrospectionRequestBody, setIntrospectionRequestHeaders]);
 
   // TODO(maya): when you have exposed a way to set error on the
   // ApolloExplorerReact component & the EmbeddedExplorer class,
@@ -49,6 +91,7 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
      */ skip:
       !!graphRef || (schemaPollIntervalMs === 0 && !!schemaFromApolloServer),
     skipPolling: schemaPollIntervalMs === 0,
+    introspectionBody: introspectionRequestBody,
   });
 
   const schema = schemaFromIntrospection ?? schemaFromApolloServer;

@@ -1,6 +1,5 @@
-import {
+import type {
   BuildSchemaOptions,
-  getIntrospectionQuery,
   IntrospectionOptions,
   IntrospectionQuery,
 } from 'graphql';
@@ -12,6 +11,7 @@ export type SchemaConfig = {
   };
   introspectionOptions?: IntrospectionOptions;
   buildSchemaOptions?: BuildSchemaOptions;
+  introspectionBody: string;
 };
 
 export type SchemaResponse = {
@@ -34,13 +34,15 @@ export function headersWithContentType(headers: Record<string, string>) {
 export const schemaLoader: (
   config: SchemaConfig,
 ) => Promise<SchemaResponse> = async (schemaConfig: SchemaConfig) => {
-  const { requestOpts, uri, introspectionOptions } = schemaConfig;
+  const {
+    requestOpts,
+    uri,
+    introspectionOptions,
+    introspectionBody,
+  } = schemaConfig;
   const fetchResult = await fetch(uri, {
     method: requestOpts?.method ?? 'post',
-    body: JSON.stringify({
-      query: getIntrospectionQuery(introspectionOptions),
-      operationName: 'IntrospectionQuery',
-    }),
+    body: introspectionBody,
     credentials: 'omit',
     ...requestOpts,
     headers: headersWithContentType(requestOpts?.headers ?? {}),

@@ -24,6 +24,7 @@ export const useSchemaFromEndpointIntrospection = ({
   skip,
   skipPolling,
   pollInterval,
+  introspectionBody,
 }: {
   endpoint: string;
   stableHeaders: Record<string, string>;
@@ -31,11 +32,13 @@ export const useSchemaFromEndpointIntrospection = ({
   skip: boolean;
   skipPolling: boolean;
   pollInterval: number;
+  introspectionBody: string | undefined;
 }) => {
   const [schema, setSchema] = useState<IntrospectionQuery>();
   const [error, setError] = useState<IntrospectionFailure>();
 
   const refreshSchema = useCallback(async () => {
+    if (!introspectionBody) return;
     const schemaResponse = await schemaLoader({
       uri: endpoint,
       requestOpts: {
@@ -45,6 +48,7 @@ export const useSchemaFromEndpointIntrospection = ({
       introspectionOptions: {
         inputValueDeprecation: false,
       },
+      introspectionBody,
     });
     if (!schemaResponse) {
       setError('unableToReachEndpoint');
