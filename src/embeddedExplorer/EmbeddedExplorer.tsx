@@ -2,6 +2,7 @@
 import { css, Global } from '@emotion/react';
 import React, { useMemo, useEffect, useState } from 'react';
 import { ApolloExplorerReact } from '@apollo/explorer';
+import type { IntrospectionQuery } from 'graphql';
 import { useSchemaFromEndpointIntrospection } from './useSchemaFromEndpointIntrospection';
 import { EmbeddedLandingPageConfig } from '../LandingPageConfig';
 
@@ -94,7 +95,8 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
     introspectionBody: introspectionRequestBody,
   });
 
-  const schema = schemaFromIntrospection ?? schemaFromApolloServer;
+  const schema: IntrospectionQuery | string | undefined =
+    schemaFromIntrospection ?? schemaFromApolloServer;
 
   return (
     <>
