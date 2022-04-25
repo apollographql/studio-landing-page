@@ -21,11 +21,11 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
     document: defaultDocument,
     variables: defaultVariables,
     headers: defaultHeaders,
-    embedDisplayOptions,
+    displayOptions,
     persistExplorerState,
     includeCookies,
     schemaPollIntervalMs,
-    schema: schemaFromApolloServer,
+    initialSchema: schemaFromApolloServer,
   } = config;
 
   const [
@@ -124,7 +124,7 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
             document: defaultDocument,
             headers: defaultHeaders,
             variables: defaultVariables,
-            displayOptions: embedDisplayOptions || {},
+            displayOptions: displayOptions || {},
           }}
           endpointUrl={endpoint}
           graphRef={graphRef}
@@ -138,7 +138,7 @@ export default ({ config }: { config: EmbeddedLandingPageConfig }) => {
               document: defaultDocument,
               headers: defaultHeaders,
               variables: defaultVariables,
-              displayOptions: embedDisplayOptions || {},
+              displayOptions: displayOptions || {},
             }}
             endpointUrl={endpoint}
             schema={schema}

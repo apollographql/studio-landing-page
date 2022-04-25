@@ -19,8 +19,8 @@ export interface EmbeddedLandingPageConfig {
   includeCookies?: boolean;
   schemaPollIntervalMs?: number;
   // Initial schema from Apollo Server
-  schema?: string;
-  embedDisplayOptions?: {
+  initialSchema?: string;
+  displayOptions?: {
     showHeadersAndEnvVars?: boolean;
     docsPanelState?: 'open' | 'closed';
     theme?: 'dark' | 'light';
