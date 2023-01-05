@@ -79,8 +79,9 @@ export default () => {
       ? `${baseUrl}/graph/${graphRef}/explorer${getQueryParamString()}`
       : `${baseUrl}/sandbox${getQueryParamString()}`;
 
-  // Studio's security rules (frame-ancestors) prevent it from running in an iframe,
-  // so we avoid redirecting to a page that won't load.
+  /* Studio's security rules (frame-ancestors) prevent it from running in an iframe,
+   * so we avoid redirecting to a page that won't load.
+   */
   if (
     !pageIsEmbedded &&
     ((!!graphRef &&
