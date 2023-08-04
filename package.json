@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": ">=12.16.1 <15.0",
+    "node": ">=12.16.1",
     "npm": ">=6.9"
   },
   "name": "studio-landing-page",
@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
+    "@emotion/cache": "^11.4.0",
     "@emotion/eslint-plugin": "^11.2.0",
     "@emotion/react": "^11.4.0",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
