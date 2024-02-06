@@ -10,7 +10,7 @@ executors:
   # cypress requires xvfb to generate screenshots and recordings from browsers
   node:
     docker:
-      - image: circleci/node:14.17.0-browsers
+      - image: circleci/node:20.11-browsers
     working_directory: ~/studio-landing-page
 
 commands:
