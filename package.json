@@ -3,6 +3,10 @@
     "node": ">=12.16.1",
     "npm": ">=6.9"
   },
+  "volta": {
+    "node": "20.11.0",
+    "npm": "10.2.4"
+  },
   "name": "studio-landing-page",
   "version": "0.1.0",
   "private": true,
