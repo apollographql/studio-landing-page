@@ -17,8 +17,8 @@ export const localRedirectCookie =
 
 // If there's a nonce on the page, we need to pass it to emotion so that it can
 // add it to the styles it injects into the page.
-const nonce = document.querySelector<HTMLOrSVGScriptElement>('script[nonce]')
-  ?.nonce;
+const nonce =
+  document.querySelector<HTMLOrSVGScriptElement>('script[nonce]')?.nonce;
 const emotionCache = createCache({
   key: 'studio-landing-page',
   nonce,
