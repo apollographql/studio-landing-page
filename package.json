@@ -13,6 +13,7 @@
     "@emotion/core": "^11.0.0",
     "@emotion/eslint-plugin": "^11.2.0",
     "@emotion/react": "^11.4.0",
+    "@storybook/cli": "^8.0.2",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
@@ -87,8 +88,8 @@
     "start": "NODE_OPTIONS=--openssl-legacy-provider node scripts/start.js",
     "build": "NODE_OPTIONS=--openssl-legacy-provider node scripts/build.js",
     "test": "NODE_OPTIONS=--openssl-legacy-provider node scripts/test.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o .out",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o .out",
     "chromatic": "npx chromatic --project-token b85a2f6d9260",
     "lint": "eslint --format 'node_modules/eslint-formatter-friendly' --ext .jsx,.ts,.tsx .",
     "lint-fix": "npm run lint -- --fix",
@@ -123,12 +124,13 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/node-logger": "^6.2.9",
+    "@storybook/addon-actions": "^8.0.2",
+    "@storybook/addon-essentials": "^8.0.2",
+    "@storybook/addon-links": "^8.0.2",
+    "@storybook/node-logger": "^8.0.2",
     "@storybook/preset-create-react-app": "^8.0.2",
     "@storybook/react": "^8.0.2",
+    "@storybook/react-webpack5": "^8.0.4",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "chromatic": "^5.8.0",
@@ -139,7 +141,8 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "storybook": "^8.0.4"
   },
   "jest": {
     "roots": [
