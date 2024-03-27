@@ -19,11 +19,13 @@ module.exports = {
     'import/no-unresolved': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
     'react/no-unescaped-entities': 'off',
+    'react/function-component-definition': 'off',
     'no-use-before-define': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-unused-vars': 'off',
     'no-nested-ternary': 'off',
     'no-undef': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
 };
