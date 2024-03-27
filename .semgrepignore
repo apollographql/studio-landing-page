@@ -23,5 +23,4 @@ tests/
 
 
 # Ignore storybook files
-.out/sb-preview/**
-.out/sb-manager/**
+.out/**
