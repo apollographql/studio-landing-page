@@ -1,0 +1,7 @@
+[[ rules ]]
+	id = "generic-api-key"
+	[ rules.allowlist ]
+		paths = [
+			'''.out/sb-preview/runtime.js''',
+			'''.out/sb-manager/chunk-KCJCJECS.js'''
+		]
