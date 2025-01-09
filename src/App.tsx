@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { css, Global } from '@emotion/react';
+import { CacheProvider, css, Global } from '@emotion/react';
 import React from 'react';
+import createCache from '@emotion/cache';
 import LandingPageBackgroundWrapper from './components/LandingPageBackgroundWrapper';
 import LocalUnconfigured from './content/LocalUnconfigured';
 import ProdConfigured from './content/ProdConfigured';
@@ -13,6 +14,15 @@ export const prodRedirectCookie = (graphRef: string) =>
   )}`;
 export const localRedirectCookie =
   'apollo-server-landing-page-redirect-to-studio-local';
+
+// If there's a nonce on the page, we need to pass it to emotion so that it can
+// add it to the styles it injects into the page.
+const nonce =
+  document.querySelector<HTMLOrSVGScriptElement>('script[nonce]')?.nonce;
+const emotionCache = createCache({
+  key: 'studio-landing-page',
+  nonce,
+});
 
 export default () => {
   const {
@@ -93,7 +103,7 @@ export default () => {
   }
 
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Global
         styles={css`
           html,
@@ -122,6 +132,6 @@ export default () => {
           />
         )}
       </LandingPageBackgroundWrapper>
-    </>
+    </CacheProvider>
   );
 };

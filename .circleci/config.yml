@@ -4,12 +4,13 @@ version: 2.1
 
 orbs:
   gcp-cli: circleci/gcp-cli@2.1.0
+  secops: apollo/circleci-secops-orb@2.0.7
 
 executors:
   # cypress requires xvfb to generate screenshots and recordings from browsers
   node:
     docker:
-      - image: circleci/node:14.17.0-browsers
+      - image: cimg/node:20.11.0-browsers
     working_directory: ~/studio-landing-page
 
 commands:
@@ -18,8 +19,11 @@ commands:
       - run:
           name: Installs npm version from package.jsons engines field
           command: |
-            ENGINES_NPM_VERSION=`node -e "console.log(require('./package.json').engines.npm)"`;
-            sudo npm i -g npm@$ENGINES_NPM_VERSION;
+            echo node version: `node -v`
+            echo npm version: `npm -v`
+            REQUIRED_NPM_VERSION=`node -e "console.log(require('./package.json').volta.npm)"`;
+            echo required npm version $REQUIRED_NPM_VERSION
+            sudo npm i -g npm@$REQUIRED_NPM_VERSION;
             npm -v;
 
       - restore_cache:
@@ -196,3 +200,16 @@ workflows:
               only: main
       # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
       # - node/test
+  security-scans:
+    jobs:
+      - secops/gitleaks:
+          context:
+            - github-orb
+            - secops-oidc
+          git-base-revision: <<#pipeline.git.base_revision>><<pipeline.git.base_revision>><</pipeline.git.base_revision >>
+          git-revision: << pipeline.git.revision >>
+      - secops/semgrep:
+          context:
+            - github-orb
+            - secops-oidc
+          git-base-revision: <<#pipeline.git.base_revision>><<pipeline.git.base_revision>><</pipeline.git.base_revision >>
