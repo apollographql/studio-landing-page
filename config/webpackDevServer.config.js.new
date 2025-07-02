@@ -15,10 +15,7 @@ const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
 const sockPort = process.env.WDS_SOCKET_PORT;
 
 module.exports = function (proxy, allowedHost) {
-  const httpsConfig = getHttpsConfig();
-  
   return {
-    port: parseInt(process.env.PORT, 10) || 3000,
     // Enable gzip compression of generated files.
     compress: true,
     // Serve static files from the public directory
@@ -51,10 +48,7 @@ module.exports = function (proxy, allowedHost) {
       // remove last slash so user can land on `/test` instead of `/test/`
       publicPath: paths.publicUrlOrPath.slice(0, -1),
     },
-    server: httpsConfig === true ? 'https' : httpsConfig === false ? 'http' : {
-      type: 'https',
-      options: httpsConfig,
-    },
+    https: getHttpsConfig(),
     host,
     historyApiFallback: {
       // Paths with dots should still use the history fallback.
