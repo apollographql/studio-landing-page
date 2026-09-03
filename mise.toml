@@ -1,0 +1,6 @@
+# studio-landing-page mise configuration
+#
+# Node version is read from .node-version via idiomatic version file support.
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "npm"]
