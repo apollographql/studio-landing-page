@@ -8,6 +8,7 @@ orbs:
 
 executors:
   # cypress requires xvfb to generate screenshots and recordings from browsers
+  # keep this version in sync with .node-version
   node:
     docker:
       - image: cimg/node:20.11.0-browsers
@@ -16,16 +17,6 @@ executors:
 commands:
   npm-install:
     steps:
-      - run:
-          name: Installs npm version from package.jsons engines field
-          command: |
-            echo node version: `node -v`
-            echo npm version: `npm -v`
-            REQUIRED_NPM_VERSION=`node -e "console.log(require('./package.json').volta.npm)"`;
-            echo required npm version $REQUIRED_NPM_VERSION
-            sudo npm i -g npm@$REQUIRED_NPM_VERSION;
-            npm -v;
-
       - restore_cache:
           name: Restore npm cache
           keys:
