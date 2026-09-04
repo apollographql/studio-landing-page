@@ -3,7 +3,7 @@
 version: 2.1
 
 orbs:
-  gcp-cli: circleci/gcp-cli@2.1.0
+  gcp-cli: circleci/gcp-cli@4.0.1
   secops: apollo/circleci-secops-orb@2.0.7
 
 executors:
@@ -137,9 +137,8 @@ jobs:
   cdn-upload-latest:
     executor: gcp-cli/google
     steps:
-      - gcp-cli/initialize:
-          gcloud-service-key: GCLOUD_GCS_SERVICE_KEY
-      - gcp-cli/install
+      - gcp-cli/setup:
+          gcloud_service_key: GCLOUD_GCS_SERVICE_KEY
       - checkout
       - attach_workspace:
           at: ~/studio-landing-page
@@ -151,9 +150,8 @@ jobs:
   cdn-upload-versioned:
     executor: gcp-cli/google
     steps:
-      - gcp-cli/initialize:
-          gcloud-service-key: GCLOUD_GCS_SERVICE_KEY
-      - gcp-cli/install
+      - gcp-cli/setup:
+          gcloud_service_key: GCLOUD_GCS_SERVICE_KEY
       - checkout
       - attach_workspace:
           at: ~/studio-landing-page
