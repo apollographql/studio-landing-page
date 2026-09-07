@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-webpack5';
 import { css, Global } from '@emotion/react';
 import LocalUnconfiguredComponent from '../content/LocalUnconfigured';
 import ProdUnconfiguredComponent from '../content/ProdUnconfigured';

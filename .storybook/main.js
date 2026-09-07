@@ -3,8 +3,8 @@ module.exports = {
 
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-webpack5-compiler-babel"
+    "@storybook/addon-webpack5-compiler-babel",
+    "@storybook/addon-docs"
   ],
 
   // App.tsx grants `height: 100%` to `html, body, #react-root` -- and
@@ -31,9 +31,5 @@ module.exports = {
   framework: {
     name: "@storybook/react-webpack5",
     options: {}
-  },
-
-  docs: {
-    autodocs: true
   }
 }
