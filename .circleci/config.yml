@@ -97,6 +97,22 @@ jobs:
           command: '[ -d build ] || PUBLIC_URL=https://apollo-server-landing-page.cdn.apollographql.com/_latest npm run build -- --no-progress'
           environment:
             BUILD_TO_CDN: 'true'
+      # This bundle is fetched at runtime by every self-hosted Apollo Server, so
+      # the syntax level we emit is a compatibility contract with whatever
+      # browsers those servers' users bring. Note tsconfig's `target: es5` does
+      # NOT govern this -- tsc runs --noEmit (type-check only) and the real
+      # transpilation is babel driven by `browserslist`.
+      #
+      # Asserting the *current* floor (ES2018, set by an object spread in
+      # App.tsx's config defaults) makes any raise deliberate rather than
+      # accidental: a toolchain change that starts emitting newer syntax fails
+      # here instead of silently in someone's browser. browserslist currently
+      # resolves to browsers that all support ES2020, so raising this is a
+      # legitimate choice -- just make it a conscious one, and update the number
+      # here in the same commit.
+      - run:
+          name: Assert browser syntax floor
+          command: npm run check:browser-syntax
       - persist_to_workspace:
           root: ~/studio-landing-page
           paths:
