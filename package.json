@@ -70,7 +70,7 @@
     "babel-preset-react-app": "^10.0.0",
     "bfj": "^7.0.2",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
-    "chromatic": "^16.10.1",
+    "chromatic": "^18.7.2",
     "css-loader": "^6.10.0",
     "css-minimizer-webpack-plugin": "^6.0.0",
     "dotenv": "8.2.0",
