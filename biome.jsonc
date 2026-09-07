@@ -1,0 +1,78 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.12/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+
+  // `.out/` (the committed Storybook build) and `build/` are *tracked*, so
+  // useIgnoreFile does not exclude them -- without this scope Biome lints the
+  // minified bundles and reports ~17k diagnostics.
+  "files": {
+    // package-lock.json is generated and 20k+ lines; formatting it would create
+    // churn on every npm install for no benefit.
+    "includes": [
+      "src/**",
+      ".storybook/**",
+      "*.js",
+      "package.json",
+      "tsconfig.json",
+      "biome.jsonc"
+    ]
+  },
+
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+  "javascript": {
+    "formatter": {
+      // Matches the .prettierrc this replaced. `semicolons` is stated
+      // explicitly because Biome defaults to "asNeeded" where Prettier
+      // defaults to "always" -- leaving it unset silently restyles every file.
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "all",
+      "arrowParentheses": "always",
+      "semicolons": "always"
+    }
+  },
+
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+
+      "correctness": {
+        // Correct in principle -- the `import React` lines really are dead,
+        // since `@jsxImportSource @emotion/react` means JSX no longer compiles
+        // to React.createElement. But the autofix is actively dangerous here:
+        // it treats the `/** @jsxImportSource @emotion/react */` pragma as a
+        // leading comment on the import and deletes it too, which silently
+        // disables Emotion's JSX runtime and the `css` prop for that file.
+        // Observed on 4 files; tsc caught it via "Property 'css' does not
+        // exist". Leave off rather than hand-auditing every autofix.
+        "noUnusedImports": "off"
+      },
+
+      "suspicious": {
+        // The redirect preference is deliberately stored in document.cookie
+        // (see localRedirectCookie / prodRedirectCookie in App.tsx).
+        "noDocumentCookie": "off",
+        // window.landingPage is arbitrary JSON injected by the Apollo Server
+        // plugin; `any` is honest here (see src/typings.d.ts).
+        "noExplicitAny": "off"
+      },
+
+      "a11y": {
+        // The two SVGs are decorative (Apollo mark, info icon) and are already
+        // adjacent to descriptive text.
+        "noSvgWithoutTitle": "off"
+      }
+    }
+  },
+
+  "assist": {
+    "enabled": true,
+    "actions": { "source": { "organizeImports": "on" } }
+  }
+}

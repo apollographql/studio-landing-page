@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React from 'react';
+import type React from 'react';
 import BackgroundTexture from '../assets/background-texture.png';
-import GlowyPlanet from './GlowyPlanet';
 import InfoIcon from '../assets/info-icon.svg';
+import GlowyPlanet from './GlowyPlanet';
 
 export default ({
   children,

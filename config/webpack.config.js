@@ -13,7 +13,6 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const babelRuntimeEntry = require.resolve('babel-preset-react-app');
@@ -46,7 +45,6 @@ const reactRefreshOverlayEntry = require.resolve(
 const shouldInlineRuntimeChunk = false;
 
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
-const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000',
@@ -625,31 +623,6 @@ module.exports = function (webpackEnv) {
             configFile: paths.appTsConfig,
           },
           async: isEnvDevelopment,
-        }),
-      !disableESLintPlugin &&
-        new ESLintPlugin({
-          // Plugin options
-          extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-          formatter: require.resolve('react-dev-utils/eslintFormatter'),
-          eslintPath: require.resolve('eslint'),
-          failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
-          context: paths.appSrc,
-          cache: true,
-          cacheLocation: path.resolve(
-            paths.appNodeModules,
-            '.cache/.eslintcache',
-          ),
-          // ESLint class options
-          cwd: paths.appPath,
-          resolvePluginsRelativeTo: __dirname,
-          baseConfig: {
-            extends: [require.resolve('eslint-config-react-app/base')],
-            rules: {
-              ...(!hasJsxRuntime && {
-                'react/react-in-jsx-scope': 'error',
-              }),
-            },
-          },
         }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize

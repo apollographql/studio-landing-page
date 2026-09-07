@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+
 import { css } from '@emotion/react';
+import React from 'react';
 
 const GlowyPlanet = () => {
   const glowPixelsGrown = 160;

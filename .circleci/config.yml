@@ -30,29 +30,22 @@ commands:
           paths:
             - ~/.npm
 jobs:
-  eslint:
+  lint:
     executor: node
     steps:
       - checkout
       - npm-install
+      # Deliberately the same `npm run lint` a developer runs locally, so CI
+      # cannot disagree with your machine. It maps to `biome check`, which does
+      # lint + formatting + import-order in one pass and is non-mutating
+      # (unlike `--write`), so it fails rather than silently reformatting.
+      #
+      # Biome replaced eslint + prettier and ~20 plugins. The old eslint cache
+      # steps went with them: Biome checks this repo in ~10ms, so caching would
+      # cost more than it saves.
       - run:
-          name: Ensure output directory exists
-          command: mkdir -p /tmp/test-reports/eslint
-      - restore_cache:
-          name: Restore eslint cache
-          keys:
-            - raw-eslint-cache--{{ checksum ".eslintrc.js" }}--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}
-            - raw-eslint-cache--{{ checksum ".eslintrc.js" }}--main--{{ checksum ".circleci/config.yml" }}
-      - run:
-          name: Linter
-          command: npm run lint -- --quiet --format junit --output-file /tmp/test-reports/eslint/results.xml
-      - save_cache:
-          name: Save eslint cache
-          key: raw-eslint-cache--{{ checksum ".eslintrc.js" }}--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}--{{ epoch }}
-          paths:
-            - .eslintcache
-      - store_test_results:
-          path: /tmp/test-reports
+          name: Lint and format check (Biome)
+          command: npm run lint
 
   typescript:
     executor: node
@@ -179,14 +172,14 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - eslint
+      - lint
       - typescript
       - build-storybook
       - build-latest-app
       - chromatic:
           requires:
             - build-storybook
-            - eslint
+            - lint
             - typescript
       - cdn-upload-latest:
           requires:
