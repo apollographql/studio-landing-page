@@ -1,15 +1,64 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  packageRules: [
-    {
-      enabled: false,
-      matchPackageNames: ["*"],
-    },
-  ],
+
+  extends: ["config:recommended", "schedule:daily"],
+
+  lockFileMaintenance: {
+    enabled: true,
+    automerge: true,
+    schedule: ["before 5am"],
+  },
+
   vulnerabilityAlerts: {
     enabled: true,
+    schedule: ["at any time"],
+    automerge: true,
+    labels: ["security"],
   },
-  lockFileMaintenance: {
-    enabled: false,
-  },
+
+  prConcurrentLimit: 5,
+  prHourlyLimit: 2,
+
+  packageRules: [
+    {
+      matchUpdateTypes: ["patch", "minor", "pin", "digest"],
+      automerge: true,
+      groupName: "patch and minor updates",
+    },
+    {
+      matchUpdateTypes: ["major"],
+      automerge: false,
+      labels: ["major-update", "needs-review"],
+    },
+    {
+      matchManagers: ["circleci"],
+      matchUpdateTypes: ["patch", "minor", "digest"],
+      automerge: true,
+      groupName: "circleci orbs and images",
+    },
+
+    // Storybook ships many packages in lockstep; a partial upgrade fails at
+    // build time with export mismatches between @storybook/* versions.
+    {
+      matchPackageNames: ["/^@storybook//", "storybook"],
+      groupName: "storybook",
+    },
+    {
+      matchPackageNames: ["react", "react-dom", "/^@types/react/"],
+      groupName: "react",
+    },
+    {
+      matchPackageNames: ["/^@emotion//"],
+      groupName: "emotion",
+    },
+
+    // The Node version is pinned in two places that must not diverge:
+    // .node-version and the cimg/node executor tag in .circleci/config.yml.
+    {
+      matchPackageNames: ["node", "cimg/node"],
+      groupName: "node runtime",
+      automerge: false,
+      labels: ["needs-review"],
+    },
+  ],
 }
