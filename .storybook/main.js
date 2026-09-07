@@ -4,7 +4,7 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app"
+    "@storybook/addon-webpack5-compiler-babel"
   ],
 
   // App.tsx grants `height: 100%` to `html, body, #react-root` -- and
