@@ -1,10 +1,10 @@
-import React from 'react';
-import { Meta } from '@storybook/react-webpack5';
 import { css, Global } from '@emotion/react';
-import LocalUnconfiguredComponent from '../content/LocalUnconfigured';
-import ProdUnconfiguredComponent from '../content/ProdUnconfigured';
-import ProdConfiguredComponent from '../content/ProdConfigured';
+import type { Meta } from '@storybook/react-webpack5';
+import type React from 'react';
 import LandingPageBackgroundWrapper from '../components/LandingPageBackgroundWrapper';
+import LocalUnconfiguredComponent from '../content/LocalUnconfigured';
+import ProdConfiguredComponent from '../content/ProdConfigured';
+import ProdUnconfiguredComponent from '../content/ProdUnconfigured';
 
 export default {
   title: 'Studio Landing Page/Landing Pages',

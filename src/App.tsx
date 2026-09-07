@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+
+import createCache from '@emotion/cache';
 import { CacheProvider, css, Global } from '@emotion/react';
 import React from 'react';
-import createCache from '@emotion/cache';
 import LandingPageBackgroundWrapper from './components/LandingPageBackgroundWrapper';
 import LocalUnconfigured from './content/LocalUnconfigured';
 import ProdConfigured from './content/ProdConfigured';
@@ -85,7 +86,7 @@ export default () => {
   };
 
   const studioLink =
-    isProd && !!graphRef
+    isProd && graphRef
       ? `${baseUrl}/graph/${graphRef}/explorer${getQueryParamString()}`
       : `${baseUrl}/sandbox${getQueryParamString()}`;
 
@@ -115,7 +116,7 @@ export default () => {
         `}
       />
       <LandingPageBackgroundWrapper showFooter={footer}>
-        {isProd && !!graphRef ? (
+        {isProd && graphRef ? (
           <ProdConfigured
             studioLink={studioLink}
             endpoint={endpoint}

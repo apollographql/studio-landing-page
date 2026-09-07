@@ -1,10 +1,10 @@
 module.exports = {
-  "stories": ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-webpack5-compiler-babel",
-    "@storybook/addon-docs"
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-webpack5-compiler-babel',
+    '@storybook/addon-docs',
   ],
 
   // App.tsx grants `height: 100%` to `html, body, #react-root` -- and
@@ -14,8 +14,7 @@ module.exports = {
   // auto-height parent: the whole page collapses to content height. Granting
   // the Storybook root the same height production gives `#react-root` restores
   // the chain, so stories render the way a real Apollo Server does.
-  'previewHead': (head) => (
-    `${head}
+  previewHead: (head) => `${head}
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
     <style>
       html,
@@ -25,11 +24,10 @@ module.exports = {
         margin: 0;
       }
     </style>
-    `
-  ),
+    `,
 
   framework: {
-    name: "@storybook/react-webpack5",
-    options: {}
-  }
-}
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
+};
