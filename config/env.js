@@ -32,9 +32,12 @@ const dotenvFiles = [
 // https://github.com/motdotla/dotenv-expand
 dotenvFiles.forEach(dotenvFile => {
   if (fs.existsSync(dotenvFile)) {
-    require('dotenv-expand')(
+    // dotenv-expand 9 moved from a callable default to a named `expand`, and
+    // dotenv 17 logs a promo tip on every config() unless `quiet` is set.
+    require('dotenv-expand').expand(
       require('dotenv').config({
         path: dotenvFile,
+        quiet: true,
       })
     );
   }
