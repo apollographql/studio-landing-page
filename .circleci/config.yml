@@ -135,13 +135,12 @@ jobs:
       - npm-install
       - attach_workspace:
           at: ~/studio-landing-page
+      # PRs gate on visual changes; main accepts what review already passed.
       - run:
           name: Chromatic
-          # TODO: auto-accept anything that hits main (add  < --auto-accept-changes=main > to the command)
-          # (mostly for squash & merge commits where a PR is approved)
           environment:
             NODE_ENV: 'production'
-          command: npm run chromatic -- --storybook-build-dir=.out --exit-once-uploaded --exit-zero-on-changes
+          command: npm run chromatic -- --storybook-build-dir=.out --auto-accept-changes=main
 
   cdn-upload-latest:
     executor: gcp-cli/google
