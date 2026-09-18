@@ -45,3 +45,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 build-storybook.log*
+
+# Storybook build output. CI rebuilds it (build-storybook -> persist_to_workspace),
+# so the committed copy was only ever stale noise.
+.out/
