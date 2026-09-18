@@ -300,19 +300,6 @@ module.exports = function (webpackEnv) {
                   require.resolve('@babel/preset-typescript'),
                 ],
 
-                plugins: [
-                  [
-                    require.resolve('babel-plugin-named-asset-import'),
-                    {
-                      loaderMap: {
-                        svg: {
-                          ReactComponent:
-                            '@svgr/webpack?-svgo,+titleProp,+ref![path]',
-                        },
-                      },
-                    },
-                  ],
-                ].filter(Boolean),
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
                 // directory for faster rebuilds.
@@ -346,7 +333,7 @@ module.exports = function (webpackEnv) {
                 plugins: [
                   [
                     require.resolve('@babel/plugin-transform-runtime'),
-                    { corejs: false, helpers: true, version: '7.29.7' },
+                    {},
                   ],
                 ],
                 cacheDirectory: true,
