@@ -12,7 +12,7 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
-const babelRuntimeEntry = require.resolve('babel-preset-react-app');
+const babelRuntimeEntry = require.resolve('@babel/runtime/package.json');
 const babelRuntimeEntryHelpers = require.resolve(
   '@babel/runtime/helpers/esm/assertThisInitialized',
   { paths: [babelRuntimeEntry] },
@@ -20,6 +20,20 @@ const babelRuntimeEntryHelpers = require.resolve(
 const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator', {
   paths: [babelRuntimeEntry],
 });
+
+// babel-preset-react-app forced these transforms regardless of browserslist,
+// which is what held the shipped bundle at ES2018 (enforced by
+// check:browser-syntax).  preset-env alone skips them because our targets
+// support the syntax natively, so they are requested explicitly.
+const POST_ES2018_TRANSFORMS = [
+  'transform-optional-chaining',
+  'transform-nullish-coalescing-operator',
+  'transform-logical-assignment-operators',
+  'transform-numeric-separator',
+  'transform-class-properties',
+  'transform-private-methods',
+  'transform-private-property-in-object',
+];
 
 const getClientEnvironment = require('./env');
 const modules = require('./modules');
@@ -271,16 +285,19 @@ module.exports = function (webpackEnv) {
               include: paths.appSrc,
               loader: require.resolve('babel-loader'),
               options: {
-                customize: require.resolve(
-                  'babel-preset-react-app/webpack-overrides',
-                ),
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app'),
+                    require.resolve('@babel/preset-env'),
                     {
-                      runtime: hasJsxRuntime ? 'automatic' : 'classic',
+                      exclude: ['transform-typeof-symbol'],
+                      include: POST_ES2018_TRANSFORMS,
                     },
                   ],
+                  [
+                    require.resolve('@babel/preset-react'),
+                    { runtime: hasJsxRuntime ? 'automatic' : 'classic' },
+                  ],
+                  require.resolve('@babel/preset-typescript'),
                 ],
 
                 plugins: [
@@ -315,10 +332,21 @@ module.exports = function (webpackEnv) {
                 babelrc: false,
                 configFile: false,
                 compact: false,
+                // node_modules is transpiled too -- this is what holds the
+                // ES2018 floor, since deps ship modern syntax.
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app/dependencies'),
-                    { helpers: true },
+                    require.resolve('@babel/preset-env'),
+                    {
+                      exclude: ['transform-typeof-symbol'],
+                      include: POST_ES2018_TRANSFORMS,
+                    },
+                  ],
+                ],
+                plugins: [
+                  [
+                    require.resolve('@babel/plugin-transform-runtime'),
+                    { corejs: false, helpers: true, version: '7.29.7' },
                   ],
                 ],
                 cacheDirectory: true,
