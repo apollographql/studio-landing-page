@@ -4,7 +4,7 @@ version: 2.1
 
 orbs:
   gcp-cli: circleci/gcp-cli@4.0.1
-  secops: apollo/circleci-secops-orb@2.0.7
+  secops: apollo/circleci-secops-orb@2.0.9
 
 executors:
   # cypress requires xvfb to generate screenshots and recordings from browsers
