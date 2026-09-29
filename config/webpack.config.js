@@ -108,6 +108,13 @@ module.exports = function (webpackEnv) {
       // client needed node's `url`, which webpack 5 no longer polyfills.
       entry: paths.appIndexJs,
     output: {
+      // webpack's own runtime bypasses babel, so hold it to the ES2018 floor
+      // here.  browserslist can't do it -- our targets all support these.
+      environment: {
+        logicalAssignment: false,
+        optionalChaining: false,
+        bigIntLiteral: false,
+      },
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
       // Add /* filename */ comments to generated require()s in the output.
@@ -249,8 +256,6 @@ module.exports = function (webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
-        // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
