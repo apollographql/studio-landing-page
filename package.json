@@ -89,7 +89,7 @@
     "workbox-webpack-plugin": "7.4.1"
   },
   "overrides": {
-    "@storybook/builder-webpack5": {
+    "@storybook/builder-webpack5@^10": {
       "webpack-dev-middleware": "^7.4.6"
     }
   },
