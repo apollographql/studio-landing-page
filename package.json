@@ -49,12 +49,12 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "8.0.7",
+    "@babel/core": "8.0.9",
     "@babel/plugin-transform-runtime": "8.0.6",
     "@babel/preset-env": "8.0.7",
     "@babel/preset-react": "8.0.1",
     "@babel/preset-typescript": "8.0.7",
-    "@biomejs/biome": "2.6.2",
+    "@biomejs/biome": "2.6.3",
     "@storybook/addon-docs": "10.6.0",
     "@storybook/addon-links": "10.6.0",
     "@storybook/addon-webpack5-compiler-babel": "4.0.1",
@@ -83,7 +83,7 @@
     "ts-pnp": "1.2.0",
     "typescript": "5.9.3",
     "url-loader": "4.1.1",
-    "webpack": "5.112.0",
+    "webpack": "5.112.2",
     "webpack-dev-server": "6.1.0",
     "webpack-manifest-plugin": "6.0.1",
     "workbox-webpack-plugin": "7.4.1"
